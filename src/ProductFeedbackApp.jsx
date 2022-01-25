@@ -24,6 +24,7 @@ function ProductFeedbackApp() {
       <Tag active={true}>Enhancement</Tag>
       <br />
       <TextInput />
+      <TextInput error={true} />
     </div>
   );
 }
