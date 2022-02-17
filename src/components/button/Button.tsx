@@ -2,10 +2,11 @@ import React from "react";
 import { makeStyles } from "@mui/styles";
 
 type ButtonProps = {
-  color: "primary" | "secondary" | "tertiary" | "danger",
-};
+  color: "primary" | "secondary" | "tertiary" | "danger";
+  // children: "string";
+} & React.ComponentProps<"button">;
 
-function Button({ children, color }: ButtonProps) {
+function Button({ children, color, ...rest }: ButtonProps) {
   const styles = makeStyles({
     Button: {
       border: "none",
@@ -35,7 +36,11 @@ function Button({ children, color }: ButtonProps) {
     },
   });
   const classes = styles();
-  return <button className={classes.Button}>{children}</button>;
+  return (
+    <button className={classes.Button} {...rest}>
+      {children}
+    </button>
+  );
 }
 
 export default Button;

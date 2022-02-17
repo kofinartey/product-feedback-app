@@ -1,9 +1,8 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-
-interface TextInputProps {
+type TextInputProps = {
   error: string;
-}
+} & React.ComponentProps<"input">;
 
 function TextInput({ error }: TextInputProps) {
   const styles = makeStyles({

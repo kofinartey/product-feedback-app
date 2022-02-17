@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 
 type TagProps = {
   children: React.ReactNode;
-  active: boolean;
+  active?: boolean;
 };
 
 function Tag(props: TagProps) {

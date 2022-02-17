@@ -5,7 +5,7 @@ import upArrow from "../../assets/shared/icon-arrow-up.svg";
 type UpvoteButtonTypes = {
   upvotes: number;
   //   onClick:
-};
+} & React.ComponentProps<"button">;
 
 function UpvoteButton({ upvotes }: UpvoteButtonTypes) {
   const styles = makeStyles({
