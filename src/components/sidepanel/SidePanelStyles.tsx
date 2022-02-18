@@ -2,6 +2,7 @@ import { makeStyles } from "@mui/styles";
 
 export default makeStyles({
   SidePanel: {
+    // width: "100%",
     overflow: "hidden",
   },
   overlay: {
@@ -10,6 +11,7 @@ export default makeStyles({
     width: "100%",
     height: "100vh",
     backgroundColor: "rgba(0,0,0,0.5)",
+    pointerEvents: "none",
     zIndex: -1,
   },
   gradient_section: {
@@ -29,13 +31,15 @@ export default makeStyles({
   },
   menu: {
     backgroundColor: "#F7F8FD",
-    padding: "2rem",
+    padding: "1.5rem",
     position: "absolute",
     width: "17rem",
     bottom: 0,
     top: "4.5rem",
-    right: 0,
-    // right: "-30rem",
+    // right: 0,
+    right: "-17rem",
+    transition: "right 0.3s ease-in-out",
+    overflow: "hidden",
   },
   tags: {
     width: "100%",
@@ -43,5 +47,13 @@ export default makeStyles({
     gap: "1rem",
     flexWrap: "wrap",
   },
-  roadmap: {},
+  roadmap: {
+    marginTop: "2rem",
+    "& $roadmap__top": {
+      display: "flex",
+      justifyContent: "space-between",
+      marginBottom: "1.5rem ",
+    },
+  },
+  roadmap__top: {},
 });

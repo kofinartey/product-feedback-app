@@ -1,20 +1,27 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+//my imports
+
 import hamburger from "../../assets/shared/mobile/icon-hamburger.svg";
 import close from "../../assets/shared/mobile/icon-close.svg";
-import SidePanelStyles from "./SidePanelStyles";
 import Card from "../card/Card";
 import Tag from "../tag/Tag";
+import SidePanelStyles from "./SidePanelStyles";
+import RoadmapTag from "../roadmap_tag/RoadmapTag";
 
 function Sidepanel() {
   const classes = SidePanelStyles();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   return (
     <div className={classes.SidePanel}>
-      <div className={classes.overlay}></div>
+      <div
+        className={classes.overlay}
+        style={{ opacity: open ? 0.5 : 0 }}
+      ></div>
       <div className={classes.gradient_section}>
         <div>
           <p>Frontend Mentor</p>
-          <p>Feedback Board</p>
+          <small>Feedback Board</small>
         </div>
         <img
           src={open ? close : hamburger}
@@ -22,9 +29,12 @@ function Sidepanel() {
           alt=""
         />
       </div>
-      <div className={classes.menu}>
+      <div
+        className={classes.menu}
+        style={open ? { right: open ? 0 : "-17rem" } : {}}
+      >
         <div className={classes.tags}>
-          <Card>
+          <Card styles={{ display: "flex", flexWrap: "wrap" }}>
             <Tag>All</Tag>
             <Tag>UI</Tag>
             <Tag>UX</Tag>
@@ -33,7 +43,17 @@ function Sidepanel() {
             <Tag>Feature</Tag>
           </Card>
         </div>
-        <div className={classes.roadmap}></div>
+        <div className={classes.roadmap}>
+          <Card>
+            <div className={classes.roadmap__top}>
+              <h4>Roadmap</h4>
+              <Link to="#">View</Link>
+            </div>
+            <RoadmapTag status="planned" value={2} />
+            <RoadmapTag status="progress" value={2} />
+            <RoadmapTag status="live" value={2} />
+          </Card>
+        </div>
       </div>
     </div>
   );

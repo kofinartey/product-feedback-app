@@ -139,8 +139,8 @@ export function DropDownMenu(props: DropDownMenuProps) {
       )}
 
       <div className={classes.menu} role="menu">
-        {/* {childrenWithProps} */}
-        {props.children}
+        {childrenWithProps}
+        {/* {props.children} */}
       </div>
     </div>
   );

@@ -1,9 +1,6 @@
 import React from "react";
 import Button from "./components/button/Button";
-import {
-  DropDownItem,
-  DropDownMenu,
-} from "./components/form_elements/DropDownMenu";
+import { DropDownItem, DropDownMenu } from "./components/dropdown/DropDownMenu";
 import TextInput from "./components/form_elements/TextInput";
 import GoBack from "./components/go_back/GoBack";
 import Tag from "./components/tag/Tag";

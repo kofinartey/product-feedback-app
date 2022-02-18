@@ -4,7 +4,7 @@ import { makeStyles } from "@mui/styles";
 type TagProps = {
   children: React.ReactNode;
   active?: boolean;
-};
+} & React.ComponentProps<"button">;
 
 function Tag(props: TagProps) {
   const styles = makeStyles({
@@ -14,6 +14,7 @@ function Tag(props: TagProps) {
       display: "flex",
       alignItems: "center",
       padding: "0.5rem 1rem",
+      margin: "0.5rem 0.5rem 0.5rem 0",
       borderRadius: "0.5rem",
       color: props.active ? "white" : "#4661E6",
       fontSize: "0.8125rem",
