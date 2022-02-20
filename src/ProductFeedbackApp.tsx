@@ -7,6 +7,7 @@ import Tag from "./components/tag/Tag";
 import UpvoteButton from "./components/upvote_button/UpvoteButton";
 import Suggestions from "./pages/suggestions/Suggestions";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import MobileMenu from "./components/mobile_menu/MobileMenu";
 
 function ProductFeedbackApp() {
   return (

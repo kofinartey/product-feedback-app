@@ -1,0 +1,47 @@
+[33mcommit 00c246c5de5bea239492605372ebde88efc17bc7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Kofi Nartey <eugeneahulu15@live.com>
+Date:   Fri Feb 18 23:18:58 2022 +0000
+
+    built sidebar
+
+[33mcommit 1e611cac2af502f7eb10ca912c7cf92ec33d39e0[m
+Author: Kofi Nartey <eugeneahulu15@live.com>
+Date:   Thu Feb 17 22:39:16 2022 +0000
+
+    .
+
+[33mcommit 023db22d9edd3b2e717985d7f57a371f1a3680d5[m
+Author: Kofi Nartey <eugeneahulu15@live.com>
+Date:   Thu Jan 27 16:58:23 2022 +0000
+
+    built dropdown component
+
+[33mcommit 8261c99a2735a0727be0ce644eacb96f4cc4b2ea[m
+Author: Kofi Nartey <eugeneahulu15@live.com>
+Date:   Tue Jan 25 23:55:56 2022 +0000
+
+    built input component
+
+[33mcommit bb48a6fb523909d0be6c33b537eec81d6a485f92[m
+Author: Kofi Nartey <eugeneahulu15@live.com>
+Date:   Tue Jan 25 21:22:35 2022 +0000
+
+    Components: button, upvote, goback, tag
+
+[33mcommit 2a5ef9be4c729fb94db7ce03c59338b1cbd9bf0a[m
+Author: Kofi Nartey <eugeneahulu15@live.com>
+Date:   Sun Jan 23 21:52:38 2022 +0000
+
+    .
+
+[33mcommit 4b821c11307dc8b378a31dbacb6f13a596f7930b[m
+Author: Kofi Nartey <eugeneahulu15@live.com>
+Date:   Sun Jan 23 21:51:10 2022 +0000
+
+    Initial setup
+
+[33mcommit d79d84d695c21299cc246ba7a2dadd58db729741[m
+Author: Kofi Nartey <eugeneahulu15@live.com>
+Date:   Sun Jan 23 20:29:33 2022 +0000
+
+    Initialize project using Create React App

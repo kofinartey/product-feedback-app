@@ -21,7 +21,7 @@ function Button({ children, color, ...rest }: ButtonProps) {
           : color === "danger"
           ? "#D73737"
           : "#F2F4FF",
-      padding: "0.7rem 2rem",
+      padding: "0.7rem 1rem",
       borderRadius: "0.5rem",
       fontWeight: "bold",
       fontSize: "0.875rem",
