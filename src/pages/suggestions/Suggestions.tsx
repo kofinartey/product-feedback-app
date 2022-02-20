@@ -18,8 +18,10 @@ function Suggestions() {
   return (
     <div className={classes.Suggestions}>
       <div className={classes.wrapper}>
-        <MobileMenu />
-        <SidePanel />
+        <aside>
+          <MobileMenu />
+          <SidePanel />
+        </aside>
         <SuggestionsList />
       </div>
     </div>

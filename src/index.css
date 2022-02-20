@@ -23,6 +23,13 @@ body {
 button {
   cursor: pointer;
 }
+a,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: unset;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

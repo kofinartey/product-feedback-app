@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter as Router } from "react-router-dom";
-import Sidepanel from "./Sidepanel";
+import Sidepanel from "./MobileMenu";
 
 describe("sidepanel", () => {
   it("initial conditions", () => {

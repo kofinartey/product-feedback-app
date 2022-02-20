@@ -17,7 +17,11 @@ function MobileMenu() {
       {/* overlay */}
       <div
         className={classes.overlay}
-        style={{ opacity: open ? 0.5 : 0 }}
+        style={{
+          opacity: open ? 0.5 : 0,
+          pointerEvents: open ? "all" : "none",
+        }}
+        onClick={() => setOpen(!open)}
       ></div>
 
       {/* part with multi-colored gradient */}
@@ -41,7 +45,7 @@ function MobileMenu() {
         role="menu"
       >
         <div className={classes.tags}>
-          <Card styles={{ display: "flex", flexWrap: "wrap" }}>
+          <Card style={{ display: "flex", flexWrap: "wrap" }}>
             <Tag>All</Tag>
             <Tag>UI</Tag>
             <Tag>UX</Tag>

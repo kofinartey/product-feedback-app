@@ -9,12 +9,12 @@ import SidePanelStyles from "./SidePanelStyles";
 function SidePanel() {
   const classes = SidePanelStyles();
   return (
-    <aside className={classes.SidePanel}>
+    <div className={classes.SidePanel}>
       <div className={classes.gradient}>
         <h4>Frontend Mentor</h4>
         <small>Feedback Board</small>
       </div>
-      <Card styles={{ display: "flex", flexWrap: "wrap" }}>
+      <Card style={{ display: "flex", flexWrap: "wrap" }}>
         <Tag>All</Tag>
         <Tag>UI</Tag>
         <Tag>UX</Tag>
@@ -31,7 +31,7 @@ function SidePanel() {
         <RoadmapTag status="progress" value={2} />
         <RoadmapTag status="live" value={2} />
       </Card>
-    </aside>
+    </div>
   );
 }
 

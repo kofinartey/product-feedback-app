@@ -32,8 +32,13 @@ export default makeStyles({
 
   "@media(min-width: 64rem) ": {
     SidePanel: {
+      maxWidth: "16rem",
+      minWidth: "12rem",
       display: "flex",
       flexDirection: "column",
+    },
+    gradient: {
+      height: "8.5rem",
     },
   },
 });

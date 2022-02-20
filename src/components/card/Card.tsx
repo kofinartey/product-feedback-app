@@ -3,17 +3,17 @@ import { makeStyles } from "@mui/styles";
 
 type CardProps = {
   children: React.ReactNode;
-  styles?: object;
+  style?: object;
 };
 
-function Card({ children, styles }: CardProps) {
+function Card({ children, style }: CardProps) {
   const CardStyles = makeStyles({
     Card: {
       width: "100%",
       backgroundColor: "white",
       padding: "1rem",
       borderRadius: "0.5rem",
-      ...styles,
+      ...style,
     },
   });
   const classes = CardStyles();

@@ -12,7 +12,7 @@ export default makeStyles({
     height: "100vh",
     backgroundColor: "rgba(0,0,0,0.5)",
     pointerEvents: "none",
-    zIndex: -1,
+    // zIndex: -1,
   },
   gradient: {
     height: "4.5rem",
