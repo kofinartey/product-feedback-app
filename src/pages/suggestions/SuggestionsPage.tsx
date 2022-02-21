@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 //my imports
-import SuggestionStyles from "./SuggestionStyles";
+import SuggestionPageStyles from "./SuggestionsPageStyles";
 import SidePanel from "../../components/sidepanel/SidePanel";
 import SuggestionsList from "./SuggestionsList";
 import MobileMenu from "../../components/mobile_menu/MobileMenu";
 
-function Suggestions() {
-  const classes = SuggestionStyles();
+function SuggestionsPage() {
+  const classes = SuggestionPageStyles();
   // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // useEffect(() => {
@@ -28,4 +28,4 @@ function Suggestions() {
   );
 }
 
-export default Suggestions;
+export default SuggestionsPage;

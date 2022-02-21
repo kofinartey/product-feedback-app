@@ -15,6 +15,29 @@ export default makeStyles({
   SuggestionsList: {
     width: "100%",
   },
+  empty: {
+    textAlign: "center",
+    padding: "2rem",
+    display: "flex",
+    alignItems: "center",
+  },
+  empty__wrapper: {
+    padding: "6rem 0",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    "& img": {
+      marginBottom: "3rem",
+    },
+    "& h4": {
+      marginBottom: "2rem",
+    },
+    "& p": {
+      marginBottom: "2rem",
+      maxWidth: "18rem",
+    },
+  },
+
   top_bar: {
     backgroundColor: "#373F68",
     padding: "0.5rem 1rem",
@@ -42,6 +65,12 @@ export default makeStyles({
       marginTop: "2rem",
       padding: "0.8rem",
       borderRadius: "0.5rem",
+    },
+    empty__wrapper: {
+      "& p": {
+        maxWidth: "26rem",
+        marginBottom: "4rem",
+      },
     },
     suggestions_tab: {
       display: "flex",

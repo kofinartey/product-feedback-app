@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@mui/styles";
 
 type ButtonProps = {
-  color: "primary" | "secondary" | "tertiary" | "danger";
+  color?: "primary" | "secondary" | "tertiary" | "danger";
   // children: "string";
 } & React.ComponentProps<"button">;
 
@@ -10,17 +10,17 @@ function Button({ children, color, ...rest }: ButtonProps) {
   const styles = makeStyles({
     Button: {
       border: "none",
-      color: color ? "white" : "#647196",
+      color: "white",
       backgroundColor:
         color === "primary"
-          ? "#AD1FEA"
+          ? "#373F68"
           : color === "secondary"
           ? "#4661E6"
           : color === "tertiary"
-          ? "#373F68"
+          ? "#AD1FEA"
           : color === "danger"
           ? "#D73737"
-          : "#F2F4FF",
+          : "#AD1FEA", //use tertiary if not specified
       padding: "0.7rem 1rem",
       borderRadius: "0.5rem",
       fontWeight: "bold",
