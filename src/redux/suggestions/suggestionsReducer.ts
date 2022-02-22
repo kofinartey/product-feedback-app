@@ -8,6 +8,7 @@ type Action = {
 export type SuggestionType = typeof suggestions.productRequests[0];
 
 const suggestionsReducer = (
+  // state = [],
   state = suggestions.productRequests,
   action: Action
 ) => {

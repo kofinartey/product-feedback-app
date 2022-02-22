@@ -7,7 +7,7 @@ import { SuggestionType } from "../../redux/suggestions/suggestionsReducer";
 import Card from "../card/Card";
 import Tag from "../tag/Tag";
 import UpvoteButton from "../upvote_button/UpvoteButton";
-import comment from "../../assets/shared/icon-comments.svg";
+import commentIcon from "../../assets/shared/icon-comments.svg";
 
 type SuggestionProps = {
   data: SuggestionType;
@@ -16,15 +16,15 @@ type SuggestionProps = {
 function Suggestion({ data }: SuggestionProps) {
   const classes = makeStyles({
     suggestion: {
-      padding: "0 2rem",
+      // padding: "0 2rem",
       margin: "1rem 0",
     },
     wrapper: {
-      padding: "1rem",
+      // padding: "1rem",
       display: "grid",
       gridTemplateRows: "repeat(4, 1fr)",
       gridTemplateColumns: "1fr 1fr",
-      gap: "0.5rem",
+      // gap: "0.5rem",
       "& $title": {
         gridRow: "1/2",
         gridColumn: "1/3",
@@ -34,6 +34,7 @@ function Suggestion({ data }: SuggestionProps) {
         gridRow: "2/3",
         gridColumn: "1/3",
         color: "#647196",
+        fontSize: "0.8125rem",
       },
       "& $tag": {
         gridRow: "3/4",
@@ -60,7 +61,7 @@ function Suggestion({ data }: SuggestionProps) {
         width: "1.5rem",
       },
       "& h4": {
-        opacity: data.comments ? 1 : 0.3,
+        opacity: data?.comments ? 1 : 0.3,
       },
     },
 
@@ -77,8 +78,8 @@ function Suggestion({ data }: SuggestionProps) {
           gridColumn: "2/3",
         },
         "& $description": {
-          //   gridRow: "2/3",
           gridColumn: "2/3",
+          fontSize: "1rem",
         },
         "& $tag": {
           //   gridRow: "2/3",
@@ -98,27 +99,28 @@ function Suggestion({ data }: SuggestionProps) {
 
   return (
     <div className={classes.suggestion}>
-      <Link to="#">
-        <Card>
-          <div className={classes.wrapper}>
-            <h4 className={classes.title}>{data.title}</h4>
-            <p className={classes.description}>{data.description}</p>
+      <Card>
+        <div className={classes.wrapper}>
+          <h4 className={classes.title}>{data?.title}</h4>
+          <p className={classes.description}>{data?.description}</p>
 
-            <div className={classes.tag}>
-              <Tag>{capFirstLetter(data.category)}</Tag>
-            </div>
-
-            <div className={classes.upvote}>
-              <UpvoteButton upvotes={data.upvotes} />
-            </div>
-
-            <div className={classes.comments}>
-              <img src={comment} alt="" />
-              <h4>{data.comments ? data.comments?.length : 0}</h4>
-            </div>
+          <div className={classes.tag}>
+            <Tag>{capFirstLetter(data?.category)}</Tag>
           </div>
-        </Card>
-      </Link>
+
+          <div
+            className={classes.upvote}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <UpvoteButton upvotes={data?.upvotes} />
+          </div>
+
+          <div className={classes.comments}>
+            <img src={commentIcon} alt="" />
+            <h4>{data?.comments ? data.comments?.length : 0}</h4>
+          </div>
+        </div>
+      </Card>
     </div>
   );
 }

@@ -15,6 +15,11 @@ function Card({ children, style }: CardProps) {
       borderRadius: "0.5rem",
       ...style,
     },
+    "@media(min-width:48rem)": {
+      Card: {
+        padding: "2rem",
+      },
+    },
   });
   const classes = CardStyles();
   return <div className={classes.Card}>{children}</div>;

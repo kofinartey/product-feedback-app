@@ -38,7 +38,15 @@ function SuggestionsList() {
       </div>
     ) : (
       listOfSuggestions.map((suggestion) => (
-        <Suggestion key={suggestion.id} data={suggestion} />
+        <div
+          key={suggestion.id}
+          className={classes.list__wrapper}
+          onClick={(event) => event.stopPropagation()}
+        >
+          <Link to={`/feedback/${suggestion.id}`}>
+            <Suggestion key={suggestion.id} data={suggestion} />
+          </Link>
+        </div>
       ))
     );
 

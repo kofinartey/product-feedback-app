@@ -1,0 +1,83 @@
+import { makeStyles } from "@mui/styles";
+
+export default makeStyles({
+  wrapper: {
+    borderBottom: "1px solid rgba(0,0,0,0.1)",
+  },
+  Comment: {
+    padding: "1rem 0",
+
+    display: "grid",
+    gridTemplateColumns: "2.5rem 2fr 1fr",
+    //   gridTemplateRows: "1fr 2fr 1fr"
+  },
+
+  //TODO: replace after sorting out image
+  user_image: {
+    width: "2.5rem",
+    height: "2.5rem",
+    borderRadius: "50%",
+    backgroundColor: "rgba(0,0,0,0.3)",
+    gridColumn: "1/2",
+  },
+  reply: {
+    gridColumn: "3/4",
+    justifySelf: "flex-end",
+    alignSelf: "center",
+    cursor: "pointer",
+    "&:hover": {
+      textDecoration: "underline",
+    },
+  },
+  name: {
+    gridColumn: "2/3",
+    gridRow: "1/2",
+    marginLeft: "1rem",
+  },
+
+  comment__content: {
+    gridColumn: "1/4",
+    padding: "1rem 0",
+  },
+
+  reply__form: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    marginBottom: "2rem",
+    "& textarea": {
+      width: "100%",
+      height: "5rem",
+    },
+    "& button": {
+      width: "100%",
+      marginTop: "1rem",
+    },
+  },
+
+  //MEDIA QUERIES
+  "@media(min-width:48rem)": {
+    Comment: {
+      gridTemplateColumns: "4rem 4fr",
+    },
+    name: {
+      margin: 0,
+    },
+    comment__content: {
+      gridColumn: "2/6",
+    },
+    reply__form: {
+      flexDirection: "row",
+      alignItems: "flex-start",
+      justifyContent: "space-between",
+      marginLeft: "4rem",
+      "& textarea": {
+        width: "80%",
+      },
+      "& button": {
+        margin: 0,
+        width: "unset",
+      },
+    },
+  },
+});
