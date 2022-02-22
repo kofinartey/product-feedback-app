@@ -2,49 +2,6 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@mui/styles";
 import arrowDown from "../../assets/shared/icon-arrow-down.svg";
 import arrowUp from "../../assets/shared/icon-arrow-up.svg";
-import check from "../../assets/shared/icon-check.svg";
-
-type DropDownItemsProps = {
-  value: string;
-  selected: boolean;
-  someFunction: (event: React.MouseEvent) => void;
-  children: React.ReactNode;
-};
-export function DropDownItem(props: DropDownItemsProps) {
-  const styles = makeStyles({
-    item: {
-      width: "100%",
-      color: "#647196",
-      backgroundColor: "white",
-      borderBottom: "2px solid #F2F4FF",
-      padding: "0.7rem 2rem",
-      cursor: "pointer",
-      transition: "color 0.2s ease-in-out",
-      position: "relative",
-      "&:hover": {
-        color: "#AD1FEA",
-      },
-      "& img": {
-        position: "absolute",
-        right: "2rem",
-      },
-    },
-  });
-  const classes = styles();
-
-  return (
-    <p
-      className={classes.item}
-      role="menuitem"
-      onClick={(e) => {
-        props.someFunction(e);
-      }}
-    >
-      {props.children}
-      {props.selected === props.children && <img src={check} alt="" />}
-    </p>
-  );
-}
 
 type DropDownMenuProps = {
   initial: string;
@@ -52,10 +9,9 @@ type DropDownMenuProps = {
 };
 export function DropDownMenu(props: DropDownMenuProps) {
   const [open, setOpen] = useState(false);
-  const styles = makeStyles({
+  const classes = makeStyles({
     DropDownMenu: {
       position: "relative",
-      // zIndex: 1000,
     },
     select: {
       width: "16rem",
@@ -101,25 +57,33 @@ export function DropDownMenu(props: DropDownMenuProps) {
       position: "absolute",
       top: "3rem",
     },
-  });
+  })();
   const [selected, setSelected] = useState(props.initial);
-  const classes = styles();
 
-  // useEffect(() => {
-  //   console.log(selected);
-  // }, [selected]);
+  const changeSelected = (event: React.MouseEvent) => {
+    const myEl = event.target as HTMLElement; //needed to fix ts issue
+    setSelected(myEl.innerText);
+    setOpen(!open);
+  };
+
+  // This component wraps other children component.
+  // It would be used like this:
+  //  <DropDownMenu>
+  //    <DropDownItem></DropDownItem>
+  //    <DropDownItem></DropDownItem>
+  //    <DropDownItem></DropDownItem>
+  //  </DropDownMenu>
+
+  // I need to pass a function to each of the child components(DropDownItem).
+  // To do so, I map over the children, clone each child and pass the function as a prop to them
+  // The UI works fine in JS, but I'm not able to specify the type of child Typescript.
 
   const childrenWithProps = React.Children.map(
     props.children,
-    //React.FunctionalComponent
     (child, index) => {
       return React.cloneElement(child, {
-        someFunction: (event: React.MouseEvent) => {
-          const myEl = event.target as HTMLElement; //needed to fix ts issue
-          setSelected(myEl.innerText);
-          setOpen(!open);
-        },
-        selected,
+        changeSelected, //i.e the function to pass
+        selected, //piece of state to pass
       });
     }
   );
