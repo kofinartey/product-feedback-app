@@ -1,12 +1,13 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
 type TextInputProps = {
-  error: string;
+  error?: string;
 } & React.ComponentProps<"input">;
 
 function TextInput({ error }: TextInputProps) {
   const styles = makeStyles({
     Input: {
+      width: "100%",
       backgroundColor: "#F7F8FD",
       color: "#3A4374",
       border: "1px solid white",

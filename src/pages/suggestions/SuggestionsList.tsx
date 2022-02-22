@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../../redux/store";
 //my imports
@@ -20,6 +20,7 @@ function SuggestionsList() {
     (state) => state.suggestions
   );
   const suggestionsNumber = listOfSuggestions.length;
+  const navigate = useNavigate();
 
   const renderSuggestions =
     suggestionsNumber === 0 ? (
@@ -32,13 +33,21 @@ function SuggestionsList() {
               Got a suggestion? Found a bug that needs to be squashed? We love
               hearing about new ideas to improve our app.
             </Text>
-            <Button>+ Add Feedback</Button>
+            <Button onClick={() => navigate("/new")}>+ Add Feedback</Button>
           </div>
         </Card>
       </div>
     ) : (
       listOfSuggestions.map((suggestion) => (
-        <Suggestion key={suggestion.id} data={suggestion} />
+        <div
+          key={suggestion.id}
+          className={classes.list__wrapper}
+          onClick={(event) => event.stopPropagation()}
+        >
+          <Link to={`/${suggestion.id}`}>
+            <Suggestion key={suggestion.id} data={suggestion} />
+          </Link>
+        </div>
       ))
     );
 
@@ -51,7 +60,7 @@ function SuggestionsList() {
           <p>{suggestionsNumber} Suggestions</p>
         </div>
         <SortTab />
-        <Button>+ Add FeedBack</Button>
+        <Button onClick={() => navigate("/new")}>+ Add Feedback</Button>
       </div>
 
       {/* list of suggestions  */}

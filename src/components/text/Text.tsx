@@ -5,9 +5,10 @@ type TextProps = {
   children: React.ReactNode;
   color?: "primary" | "secondary" | "tertiary" | "danger";
   as: "p" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-} & React.ComponentProps<"p" | "h1">;
+  // data-testid?:
+} & React.ComponentProps<"p" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6">;
 
-function Text({ children, color, as }: TextProps) {
+function Text({ children, color, as, ...rest }: TextProps) {
   const classes = makeStyles({
     text: {
       color:
@@ -33,7 +34,11 @@ function Text({ children, color, as }: TextProps) {
 
   const Component = as || "div";
 
-  return <Component className={classes.text}>{children}</Component>;
+  return (
+    <Component className={classes.text} {...rest}>
+      {children}
+    </Component>
+  );
 }
 
 export default Text;

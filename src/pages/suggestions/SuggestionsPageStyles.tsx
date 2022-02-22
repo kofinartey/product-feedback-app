@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 export default makeStyles({
   Suggestions: {
     // width: "100%",
-    backgroundColor: "#F7F8FD",
+
     minHeight: "100vh",
     display: "flex",
     justifyContent: "center",
@@ -14,6 +14,9 @@ export default makeStyles({
   },
   SuggestionsList: {
     width: "100%",
+  },
+  list__wrapper: {
+    padding: "0 2rem",
   },
   empty: {
     textAlign: "center",
@@ -65,6 +68,9 @@ export default makeStyles({
       marginTop: "2rem",
       padding: "0.8rem",
       borderRadius: "0.5rem",
+    },
+    list__wrapper: {
+      padding: "0",
     },
     empty__wrapper: {
       "& p": {

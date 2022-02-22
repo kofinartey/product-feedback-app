@@ -11,10 +11,15 @@ function Card({ children, style }: CardProps) {
     Card: {
       width: "100%",
       backgroundColor: "white",
-      padding: "1rem",
+      padding: "2rem",
       borderRadius: "0.5rem",
       ...style,
     },
+    // "@media(min-width:48rem)": {
+    //   Card: {
+    //     padding: "2rem",
+    //   },
+    // },
   });
   const classes = CardStyles();
   return <div className={classes.Card}>{children}</div>;

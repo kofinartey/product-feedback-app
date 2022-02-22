@@ -1,19 +1,17 @@
 import React from "react";
-import Button from "./components/button/Button";
-import { DropDownItem, DropDownMenu } from "./components/dropdown/DropDownMenu";
-import TextInput from "./components/form_elements/TextInput";
-import GoBack from "./components/go_back/GoBack";
-import Tag from "./components/tag/Tag";
-import UpvoteButton from "./components/upvote_button/UpvoteButton";
-import SuggestionsPage from "./pages/suggestions/SuggestionsPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import MobileMenu from "./components/mobile_menu/MobileMenu";
 
+//my imports
+import SuggestionsPage from "./pages/suggestions/SuggestionsPage";
+import FeedbackDetail from "./pages/feeback_detail/FeedbackDetail";
+import NewFeedback from "./pages/new_feedback/NewFeedback";
 function ProductFeedbackApp() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<SuggestionsPage />} />
+        <Route path=":feedbackId" element={<FeedbackDetail />} />
+        <Route path="new" element={<NewFeedback />} />
       </Routes>
     </Router>
   );

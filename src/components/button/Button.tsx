@@ -24,7 +24,7 @@ function Button({ children, color, ...rest }: ButtonProps) {
       padding: "0.7rem 1rem",
       borderRadius: "0.5rem",
       fontWeight: "bold",
-      fontSize: "0.875rem",
+      fontSize: "0.8125rem",
       cursor: "pointer",
       transition: "all ease-in-out 0.1s",
       "&:hover": {
@@ -32,6 +32,11 @@ function Button({ children, color, ...rest }: ButtonProps) {
       },
       "&:active": {
         opacity: 0.8,
+      },
+    },
+    "media(min-width:48rem)": {
+      Button: {
+        fontSize: "0.875rem",
       },
     },
   });
