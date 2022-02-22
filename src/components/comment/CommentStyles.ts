@@ -2,10 +2,10 @@ import { makeStyles } from "@mui/styles";
 
 export default makeStyles({
   wrapper: {
-    borderBottom: "1px solid rgba(0,0,0,0.1)",
+    // borderBottom: "1px solid rgba(0,0,0,0.1)",
   },
   Comment: {
-    padding: "1rem 0",
+    margin: "1rem 0 0 0",
 
     display: "grid",
     gridTemplateColumns: "2.5rem 2fr 1fr",
@@ -38,6 +38,15 @@ export default makeStyles({
   comment__content: {
     gridColumn: "1/4",
     padding: "1rem 0",
+    "& span": {
+      fontWeight: "bold",
+      color: "#AD1FEA",
+    },
+  },
+
+  replies: {
+    paddingLeft: "2rem",
+    borderLeft: "1px solid rgba(0,0,0,0.1)",
   },
 
   reply__form: {
@@ -58,6 +67,8 @@ export default makeStyles({
   //MEDIA QUERIES
   "@media(min-width:48rem)": {
     Comment: {
+      margin: "2rem 0",
+
       gridTemplateColumns: "4rem 4fr",
     },
     name: {
@@ -65,6 +76,9 @@ export default makeStyles({
     },
     comment__content: {
       gridColumn: "2/6",
+    },
+    replies: {
+      marginLeft: "2rem",
     },
     reply__form: {
       flexDirection: "row",

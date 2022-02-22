@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { useParams } from "react-router-dom";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../../redux/store";
@@ -58,11 +58,13 @@ function FeedbackDetail() {
             <div>
               <Text as="h3">{feedback?.comments?.length} Comments</Text>
             </div>
-            <div>
-              {comments?.map((comment) => (
-                <Comment key={comment.id} comment={comment} />
-              ))}
-            </div>
+            {/* render comments */}
+            {comments?.map((comment) => (
+              <Fragment key={comment.id}>
+                <Comment comment={comment} />
+                {/* <hr /> */}
+              </Fragment>
+            ))}
           </Card>
         </section>
 

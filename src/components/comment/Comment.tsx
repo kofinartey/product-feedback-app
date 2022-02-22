@@ -8,14 +8,15 @@ import CommentStyles from "./CommentStyles";
 
 type CommentProps = {
   comment: {
-    id: number;
+    id?: number;
     content: string;
     user: {
       image: string;
       name: string;
       username: string;
     };
-    // replies?: CommentProps[];
+    replyingTo?: string;
+    replies?: CommentProps[];
   };
 };
 
@@ -33,10 +34,17 @@ function Comment({ comment }: CommentProps) {
   return (
     <div className={classes.wrapper}>
       {/* actual comment */}
-      <div className={classes.Comment}>
-        {/* <img src={process.env.PUBLIC_URL + `${comment.user.image}`} alt="" /> */}
-        <div className={classes.user_image}></div>
-        <div className={classes.reply} onClick={() => setReplying(!replying)}>
+      <div
+        className={classes.Comment}
+        onClick={() => replying && setReplying(false)}
+      >
+        <img
+          src={process.env.PUBLIC_URL + `${comment.user.image}`}
+          className={classes.user_image}
+          alt=""
+        />
+        {/* <div className={classes.user_image}></div> */}
+        <div className={classes.reply} onClick={() => setReplying(true)}>
           <Text as="h5" color="secondary">
             Reply
           </Text>
@@ -47,11 +55,20 @@ function Comment({ comment }: CommentProps) {
         </div>
 
         <div className={classes.comment__content}>
-          <Text as="p">{comment.content}</Text>
+          <Text as="p">
+            {comment.replyingTo ? <span>@{comment.replyingTo} </span> : ""}
+            {comment.content}
+          </Text>
         </div>
       </div>
 
       {/* replies */}
+      <div className={classes.replies}>
+        {comment.replies &&
+          comment.replies.map((reply) => (
+            <Comment comment={reply} key={reply.content} />
+          ))}
+      </div>
 
       {/* reply form */}
       {replying && (

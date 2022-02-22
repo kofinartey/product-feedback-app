@@ -7,6 +7,7 @@ type TextInputProps = {
 function TextInput({ error }: TextInputProps) {
   const styles = makeStyles({
     Input: {
+      width: "100%",
       backgroundColor: "#F7F8FD",
       color: "#3A4374",
       border: "1px solid white",

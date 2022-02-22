@@ -8,6 +8,7 @@ type TextAreaProps = {
 function TextArea({ placeholder, ...rest }: TextAreaProps) {
   const classes = makeStyles({
     TextArea: {
+      width: "100%",
       backgroundColor: "#F7F8FD",
       height: "5rem",
       color: "#3A4374",
