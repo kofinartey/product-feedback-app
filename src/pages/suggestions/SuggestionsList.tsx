@@ -2,8 +2,9 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../../redux/store";
+
 //my imports
-import { SuggestionType } from "../../redux/suggestions/suggestionsReducer";
+import { SuggestionInterface } from "../../types";
 import Suggestion from "../../components/suggestion/Suggestion";
 import Card from "../../components/card/Card";
 import Button from "../../components/button/Button";
@@ -16,9 +17,7 @@ import Text from "../../components/text/Text";
 function SuggestionsList() {
   const classes = SuggestionPageStyles();
   const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-  const listOfSuggestions: SuggestionType[] = useAppSelector(
-    (state) => state.suggestions
-  );
+  const listOfSuggestions = useAppSelector((state) => state.suggestions);
   const suggestionsNumber = listOfSuggestions.length;
   const navigate = useNavigate();
 

@@ -1,11 +1,10 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../../redux/store";
 //my imports
 import Text from "../../components/text/Text";
 import Suggestion from "../../components/suggestion/Suggestion";
-import { SuggestionType } from "../../redux/suggestions/suggestionsReducer";
 import GoBack from "../../components/go_back/GoBack";
 import Button from "../../components/button/Button";
 import FeedbackDetailStyles from "./FeedbackDetailStyles";
@@ -24,12 +23,14 @@ function FeedbackDetail() {
   const feedback = allFeedbacks.find(
     (item) => item.id.toString() === feedbackId
   );
+
   const comments = feedback?.comments;
 
   const MAX_CHARACTERS = 250;
   const [newComment, setNewComment] = useState("");
   const [wordsLeft, setWordsLeft] = useState(250);
   //  TODO:  write test for new comment character length
+
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const entry = event.target.value;
     setNewComment(entry);

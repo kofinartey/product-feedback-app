@@ -81,6 +81,7 @@ export function DropDownMenu(props: DropDownMenuProps) {
   const childrenWithProps = React.Children.map(
     props.children,
     (child, index) => {
+      //@ts-ignore
       return React.cloneElement(child, {
         changeSelected, //i.e the function to pass
         selected, //piece of state to pass

@@ -4,20 +4,12 @@ import TextArea from "../form_elements/TextArea";
 import TextInput from "../form_elements/TextInput";
 //my imports
 import Text from "../text/Text";
+import { CommentInterface } from "../../types";
 import CommentStyles from "./CommentStyles";
+import Reply from "../reply/Reply";
 
 type CommentProps = {
-  comment: {
-    id?: number;
-    content: string;
-    user: {
-      image: string;
-      name: string;
-      username: string;
-    };
-    replyingTo?: string;
-    replies?: CommentProps[];
-  };
+  comment: CommentInterface;
 };
 
 function Comment({ comment }: CommentProps) {
@@ -55,18 +47,15 @@ function Comment({ comment }: CommentProps) {
         </div>
 
         <div className={classes.comment__content}>
-          <Text as="p">
-            {comment.replyingTo ? <span>@{comment.replyingTo} </span> : ""}
-            {comment.content}
-          </Text>
+          <Text as="p">{comment.content}</Text>
         </div>
       </div>
 
       {/* replies */}
       <div className={classes.replies}>
         {comment.replies &&
-          comment.replies.map((reply) => (
-            <Comment comment={reply} key={reply.content} />
+          comment.replies.map((reply, index) => (
+            <Reply key={index} reply={reply} />
           ))}
       </div>
 

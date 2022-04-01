@@ -1,11 +1,10 @@
 import suggestions from "../../data.json";
+import { SuggestionInterface } from "../../types";
 
 type Action = {
   type: string;
   payload?: string | number;
 };
-
-export type SuggestionType = typeof suggestions.productRequests[0];
 
 const suggestionsReducer = (
   // state = [],

@@ -1,16 +1,16 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 //my imports
 import { capFirstLetter } from "../../helper-functions/capFirstLetter";
-import { SuggestionType } from "../../redux/suggestions/suggestionsReducer";
+import { SuggestionInterface } from "../../types";
 import Card from "../card/Card";
 import Tag from "../tag/Tag";
 import UpvoteButton from "../upvote_button/UpvoteButton";
 import commentIcon from "../../assets/shared/icon-comments.svg";
 
 type SuggestionProps = {
-  data: SuggestionType;
+  data: SuggestionInterface;
 };
 
 function Suggestion({ data }: SuggestionProps) {
@@ -97,6 +97,23 @@ function Suggestion({ data }: SuggestionProps) {
     },
   })();
 
+  const [totalNumberOfComments, setTotalNumberofComments] = useState(0);
+
+  // calculate toal number of comments. ie. comments + replies
+  useEffect(() => {
+    function calcTotalComments() {
+      data.comments.map((comment) => {
+        setTotalNumberofComments((curState) => curState + 1);
+        if (comment.replies) {
+          comment.replies.forEach((reply) => {
+            setTotalNumberofComments((curState) => curState + 1);
+          });
+        }
+      });
+    }
+    calcTotalComments();
+  }, []);
+
   return (
     <div className={classes.suggestion}>
       <Card>
@@ -117,7 +134,7 @@ function Suggestion({ data }: SuggestionProps) {
 
           <div className={classes.comments}>
             <img src={commentIcon} alt="" />
-            <h4>{data?.comments ? data.comments?.length : 0}</h4>
+            <h4>{totalNumberOfComments}</h4>
           </div>
         </div>
       </Card>
