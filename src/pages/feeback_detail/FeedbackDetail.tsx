@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../../redux/store";
 //my imports
@@ -49,7 +49,9 @@ function FeedbackDetail() {
       <div className={classes.wrapper}>
         <nav>
           <GoBack />
-          <Button color="secondary">Edit Feedback</Button>
+          <Link to={`/edit/${feedback!.id}`}>
+            <Button color="secondary">Edit Feedback</Button>
+          </Link>
         </nav>
         <Suggestion data={feedback!} />
 

@@ -43,7 +43,7 @@ function SuggestionsList() {
           className={classes.list__wrapper}
           onClick={(event) => event.stopPropagation()}
         >
-          <Link to={`/${suggestion.id}`}>
+          <Link to={`/feedback/${suggestion.id}`}>
             <Suggestion key={suggestion.id} data={suggestion} />
           </Link>
         </div>
