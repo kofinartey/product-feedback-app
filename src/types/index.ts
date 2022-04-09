@@ -17,7 +17,7 @@ export interface SuggestionInterface {
   title: string;
   category: string;
   upvotes: number;
-  status: string;
+  status: "planned"|"in-progress"| "live" | string;
   description: string;
   comments: CommentInterface[] | [];
 }

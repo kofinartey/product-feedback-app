@@ -8,7 +8,7 @@ type Action = {
 
 const suggestionsReducer = (
   // state = [],
-  state = suggestions.productRequests,
+  state: SuggestionInterface[]  = suggestions.productRequests,
   action: Action
 ) => {
   return state;

@@ -5,10 +5,11 @@ import { RootState, AppDispatch } from "../../redux/store";
 
 //my imports
 import RoadmapStyles from "./RoadmapStyles";
+import { capFirstLetter } from "../../helper-functions/capFirstLetter";
 import GoBack from "../../components/go_back/GoBack";
 import Button from "../../components/button/Button";
 import Text from "../../components/text/Text";
-import Suggestion from "../../components/suggestion/Suggestion";
+import RoadmapSuggestion from "../../components/roadmap_suggestion/RoadmapSuggestion";
 import colors from "../../utils/colors";
 
 function Roadmap() {
@@ -33,12 +34,35 @@ function Roadmap() {
     (suggestion) => suggestion.status === "live"
   );
 
-  const plannedRender = plannedSuggestions.map((item) => (
-    <Suggestion data={item} />
-  ));
-  const inProgressRender = inProgressSuggestions.map((item) => (
-    <Suggestion data={item} key={item.id} />
-  ));
+  const plannedRender = (
+    <div>
+      <Text as="h3">Planned ({plannedSuggestions.length}) </Text>
+      <Text as="p">Ideas prioritized for research</Text>
+      {plannedSuggestions.map((item) => (
+        <RoadmapSuggestion data={item} key={item.id} />
+      ))}
+    </div>
+  );
+
+  const inProgressRender = (
+    <div>
+      <Text as="h3">In-Progress ({inProgressSuggestions.length})</Text>
+      <Text as="p">Features currently being develepoed</Text>
+      {inProgressSuggestions.map((item) => (
+        <RoadmapSuggestion data={item} key={item.id} />
+      ))}
+    </div>
+  );
+
+  const liveRender = (
+    <div>
+      <Text as="h3">Live ({liveSuggestions.length})</Text>
+      <Text as="p">Released features</Text>
+      {liveSuggestions.map((item) => (
+        <RoadmapSuggestion data={item} key={item.id} />
+      ))}
+    </div>
+  );
 
   const indicatorStyles = {
     left:
@@ -54,6 +78,13 @@ function Roadmap() {
         ? colors.purple
         : colors.orange,
   };
+
+  //apply to wrapper
+  const slidingStyles = {
+    left:
+      selected === "live" ? "-200%" : selected === "in-progress" ? "-100%" : 0,
+  };
+
   /*  page layout
   <main>
     <page-bar />
@@ -80,17 +111,23 @@ function Roadmap() {
         <div className={classes.statusSelectors}>
           {statusList.map((status, index) => (
             <div
-              className={classes.statusContainer}
+              className={classes.statusTab}
               key={index}
               onClick={() => setSelected(status.status)}
             >
-              <Text as="h5">{status.status}</Text>
+              <Text as="h5">{capFirstLetter(status.status)}</Text>
             </div>
           ))}
           <div className={classes.tabIndicator} style={indicatorStyles}></div>
         </div>
 
-        <div className={classes.wrapper}>{inProgressRender}</div>
+        <div className={classes.window}>
+          <div className={classes.wrapper} style={slidingStyles}>
+            <div className={classes.view}>{plannedRender}</div>
+            <div className={classes.view}>{inProgressRender}</div>
+            <div className={classes.view}>{liveRender}</div>
+          </div>
+        </div>
       </div>
     </main>
   );

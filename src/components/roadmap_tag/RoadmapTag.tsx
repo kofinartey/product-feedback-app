@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@mui/styles";
 
 type RoadmapTagTypes = {
-  status: "planned" | "in-progress" | "live" | undefined;
+  status: "planned" | "in-progress" | "live" | string;
   value?: number;
 };
 

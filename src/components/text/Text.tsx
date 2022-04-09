@@ -20,7 +20,8 @@ type TextProps = {
 function Text({ children, textColor, as, ...rest }: TextProps) {
   const classes = makeStyles({
     text: {
-      color: textColor && `${colors[textColor]}`,
+      // color: textColor && `${colors[textColor]}`,
+      color: textColor ? `${colors[textColor]}` : colors.darkGrey,
       fontSize: as === "p" ? "13px" : as === "h4" ? "1.125rem" : "",
     },
     "@media(min-width: 48rem)": {

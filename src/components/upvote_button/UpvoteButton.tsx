@@ -4,10 +4,11 @@ import upArrow from "../../assets/shared/icon-arrow-up.svg";
 
 type UpvoteButtonTypes = {
   upvotes: number;
+  inRoadmap?: boolean;
   //   onClick:
 } & React.ComponentProps<"button">;
 
-function UpvoteButton({ upvotes }: UpvoteButtonTypes) {
+function UpvoteButton({ upvotes, inRoadmap, ...rest }: UpvoteButtonTypes) {
   const styles = makeStyles({
     btn: {
       backgroundColor: "#F2F4FE",
@@ -35,11 +36,11 @@ function UpvoteButton({ upvotes }: UpvoteButtonTypes) {
 
     "@media(min-width: 48rem)": {
       btn: {
-        width: "2.5rem",
-        flexDirection: "column",
+        // width: "2.5rem",
+        flexDirection: !inRoadmap ? "column" : "row",
         padding: "0.5rem",
         "& img": {
-          marginRight: 0,
+          marginRight: !inRoadmap ? 0 : "0.5rem",
           marginBottom: "0.4rem",
         },
       },
@@ -47,7 +48,7 @@ function UpvoteButton({ upvotes }: UpvoteButtonTypes) {
   });
   const classes = styles();
   return (
-    <button className={classes.btn}>
+    <button className={classes.btn} {...rest}>
       <img src={upArrow} alt="" />
       <p>{upvotes}</p>
     </button>

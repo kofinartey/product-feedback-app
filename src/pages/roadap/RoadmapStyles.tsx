@@ -7,10 +7,15 @@ export default makeStyles({
     justifyContent: "center",
   },
   pageWrapper: {
+    // height: "100%",
     width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   pagebar: {
     height: "6.25rem",
+    width: "100%",
     backgroundColor: colors.darkGrey,
     padding: "1rem",
     color: "white",
@@ -18,16 +23,15 @@ export default makeStyles({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  wrapper: {
-    width: "90%",
-  },
+
   statusSelectors: {
+    width: "100%",
     display: "flex",
     borderBottom: "1px solid rgba(0,0,0,0.1)",
     position: "relative",
     "& p": {},
   },
-  statusContainer: {
+  statusTab: {
     width: "100%",
     height: "4rem",
     display: "flex",
@@ -47,8 +51,26 @@ export default makeStyles({
     backgroundColor: "red",
     position: "absolute",
     bottom: 0,
-    // left: "9rem",
+
     transition: "all 0.3s ease-in-out",
+  },
+  window: {
+    width: "90%",
+    minHeight: "100%",
+    overflowX: "hidden",
+  },
+
+  wrapper: {
+    // height: "100%",
+    width: "300%",
+    display: "flex",
+    alignItems: "flex-start",
+    position: "relative",
+    transition: "left ease-in-out 0.3s",
+  },
+  view: {
+    width: "100%",
+    padding: "1rem",
   },
 
   "@media(min-width: 48rem)": {
@@ -59,6 +81,16 @@ export default makeStyles({
     },
     pagebar: {
       borderRadius: "0.8rem",
+    },
+    statusSelectors: {
+      display: "none",
+    },
+    window: {
+      width: "100%",
+      marginTop: "2rem",
+    },
+    wrapper: {
+      width: "100%",
     },
   },
 
