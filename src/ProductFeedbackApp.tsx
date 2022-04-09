@@ -6,6 +6,7 @@ import SuggestionsPage from "./pages/suggestions/SuggestionsPage";
 import FeedbackDetail from "./pages/feeback_detail/FeedbackDetail";
 import NewFeedback from "./pages/new_feedback/NewFeedback";
 import EditFeedback from "./pages/edit_feedback/EditFeedback";
+import Roadmap from "./pages/roadap/Roadmap";
 function ProductFeedbackApp() {
   return (
     <Router>
@@ -14,8 +15,9 @@ function ProductFeedbackApp() {
         <Route path="feedback">
           <Route path=":feedbackId" element={<FeedbackDetail />} />
         </Route>
-        <Route path="edit/:id" element={<EditFeedback />} />
         <Route path="new" element={<NewFeedback />} />
+        <Route path="edit/:id" element={<EditFeedback />} />
+        <Route path="roadmap" element={<Roadmap />} />
       </Routes>
     </Router>
   );

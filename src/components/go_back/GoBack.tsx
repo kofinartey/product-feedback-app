@@ -19,6 +19,7 @@ function GoBack(props: GoBackProps) {
       cursor: "pointer",
       "& img": {
         marginRight: "1rem",
+        "& svg": { color: "red" },
       },
       "&:hover": {
         textDecoration: "underline",

@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 //my imports
+import RoadmapTag from "../roadmap_tag/RoadmapTag";
 import { capFirstLetter } from "../../helper-functions/capFirstLetter";
 import { SuggestionInterface } from "../../types";
+import colors from "../../utils/colors";
 import Card from "../card/Card";
 import Tag from "../tag/Tag";
 import UpvoteButton from "../upvote_button/UpvoteButton";

@@ -2,8 +2,8 @@ import React from "react";
 import { makeStyles } from "@mui/styles";
 
 type RoadmapTagTypes = {
-  status: "planned" | "progress" | "live";
-  value: number;
+  status: "planned" | "in-progress" | "live" | undefined;
+  value?: number;
 };
 
 function RoadmapTag({ status, value }: RoadmapTagTypes) {
@@ -27,7 +27,7 @@ function RoadmapTag({ status, value }: RoadmapTagTypes) {
       backgroundColor:
         status === "planned"
           ? "#F49F85"
-          : status === "progress"
+          : status === "in-progress"
           ? "#AD1FEA"
           : status === "live"
           ? "#62BCFA"
@@ -41,7 +41,7 @@ function RoadmapTag({ status, value }: RoadmapTagTypes) {
   const text =
     status === "planned"
       ? "Planned"
-      : status === "progress"
+      : status === "in-progress"
       ? "In-Progress"
       : status === "live"
       ? "Live"

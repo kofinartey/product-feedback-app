@@ -61,7 +61,7 @@ function MobileMenu() {
               <Link to="#">View</Link>
             </div>
             <RoadmapTag status="planned" value={2} />
-            <RoadmapTag status="progress" value={2} />
+            <RoadmapTag status="in-progress" value={2} />
             <RoadmapTag status="live" value={2} />
           </Card>
         </div>

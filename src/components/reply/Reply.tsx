@@ -29,7 +29,7 @@ function Reply({ reply }: ReplyProps) {
         />
         {/* <div className={classes.user_image}></div> */}
         <div className={classes.reply} onClick={() => setReplying(true)}>
-          <Text as="h5" color="secondary">
+          <Text as="h5" color="blue">
             Reply
           </Text>
         </div>

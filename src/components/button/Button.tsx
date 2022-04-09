@@ -20,7 +20,7 @@ function Button({ children, color, ...rest }: ButtonProps) {
           ? "#AD1FEA"
           : color === "danger"
           ? "#D73737"
-          : "#AD1FEA", //use tertiary if not specified
+          : "#AD1FEA", //use tcolor if not specified
       padding: "0.7rem 1rem",
       borderRadius: "0.5rem",
       fontWeight: "bold",

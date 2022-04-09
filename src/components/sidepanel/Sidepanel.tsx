@@ -25,10 +25,10 @@ function SidePanel() {
       <Card>
         <div className={classes.roadmap__top}>
           <h4>Roadmap</h4>
-          <Link to="#">View</Link>
+          <Link to="/roadmap">View</Link>
         </div>
         <RoadmapTag status="planned" value={2} />
-        <RoadmapTag status="progress" value={2} />
+        <RoadmapTag status="in-progress" value={2} />
         <RoadmapTag status="live" value={2} />
       </Card>
     </div>
