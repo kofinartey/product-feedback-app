@@ -19,8 +19,8 @@ function Comment({ comment }: CommentProps) {
   // COMMENT LAYOUT
   //    <wrapper>
   //        <comment>
-  //        <replies>
   //        <reply input>
+  //        <replies>
   //    <wrapper>
 
   return (
@@ -51,14 +51,6 @@ function Comment({ comment }: CommentProps) {
         </div>
       </div>
 
-      {/* replies */}
-      <div className={classes.replies}>
-        {comment.replies &&
-          comment.replies.map((reply, index) => (
-            <Reply key={index} reply={reply} />
-          ))}
-      </div>
-
       {/* reply form */}
       {replying && (
         <div className={classes.reply__form}>
@@ -66,6 +58,14 @@ function Comment({ comment }: CommentProps) {
           <Button>Post Reply</Button>
         </div>
       )}
+
+      {/* replies */}
+      <div className={classes.replies}>
+        {comment.replies &&
+          comment.replies.map((reply, index) => (
+            <Reply key={index} reply={reply} />
+          ))}
+      </div>
     </div>
   );
 }

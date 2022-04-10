@@ -1,17 +1,30 @@
 import suggestions from "../../data.json";
-import { SuggestionInterface } from "../../types";
+import { CommentInterface, SuggestionInterface, UserInterface } from "../../types";
 
-type Action = {
-  type: string;
-  payload?: string | number;
-};
+
+type addNewComment = {
+  type: "ADD_NEW_COMMENT"
+  payload: {
+    suggestionId: string | number
+    comment: CommentInterface
+  }
+}
+type ActionType = addNewComment
 
 const suggestionsReducer = (
   // state = [],
   state: SuggestionInterface[]  = suggestions.productRequests,
-  action: Action
+  action: ActionType
 ) => {
-  return state;
+  switch(action.type){
+    case "ADD_NEW_COMMENT":
+      return state.map(suggestion => suggestion.id !== action.payload.suggestionId ? suggestion: {
+        ...suggestion,
+        comments: [...suggestion.comments, action.payload.comment]
+      })
+      default: 
+      return state
+  }
 };
 
 export default suggestionsReducer;

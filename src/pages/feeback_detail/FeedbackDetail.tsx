@@ -1,8 +1,8 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { TypedUseSelectorHook, useSelector } from "react-redux";
-import { RootState, AppDispatch } from "../../redux/store";
+
 //my imports
+import { useAppDispatch, useAppSelector } from "../../utils/redux-hooks";
 import Text from "../../components/text/Text";
 import Suggestion from "../../components/suggestion/Suggestion";
 import GoBack from "../../components/go_back/GoBack";
@@ -14,7 +14,8 @@ import TextArea from "../../components/form_elements/TextArea";
 
 function FeedbackDetail() {
   const classes = FeedbackDetailStyles();
-  const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.user);
   const allFeedbacks = useAppSelector((state) => state.suggestions);
 
   const params = useParams();
@@ -28,6 +29,7 @@ function FeedbackDetail() {
 
   const MAX_CHARACTERS = 250;
   const [newComment, setNewComment] = useState("");
+  const [newCommentError, setNewCommentError] = useState(false);
   const [wordsLeft, setWordsLeft] = useState(250);
   //  TODO:  write test for new comment character length
 
@@ -35,6 +37,26 @@ function FeedbackDetail() {
     const entry = event.target.value;
     setNewComment(entry);
     setWordsLeft(MAX_CHARACTERS - entry.length);
+    setNewCommentError(false);
+  };
+
+  const handleAddNewComment = () => {
+    if (newComment.trim() === "") {
+      setNewCommentError(true);
+    } else {
+      dispatch({
+        type: "ADD_NEW_COMMENT",
+        payload: {
+          suggestionId: feedback!.id,
+          comment: {
+            content: newComment,
+            id: "swwrw",
+            user,
+            replies: [],
+          },
+        },
+      });
+    }
   };
 
   //GENEARL PAGE LAYOUT
@@ -42,6 +64,7 @@ function FeedbackDetail() {
   //      <nav></nav>
   //      <feedbackSummary/>
   //      <comments></commments>
+  //      <addNewComment/>
   //   </FeedbackDetail>
 
   return (
@@ -53,6 +76,8 @@ function FeedbackDetail() {
             <Button color="secondary">Edit Feedback</Button>
           </Link>
         </nav>
+
+        {/* feedbackSummary */}
         <Suggestion data={feedback!} />
 
         {/* comments section */}
@@ -76,17 +101,21 @@ function FeedbackDetail() {
           <Card>
             <Text as="h4">Add Comment</Text>
             <div className={classes.input__wrapper}>
-              <TextArea
-                name="comment"
-                placeholder="Type your comment here"
-                maxLength={250}
-                role="textbox"
-                onChange={handleChange}
-              />
+              <div className={classes.textInput}>
+                <TextArea
+                  name="comment"
+                  placeholder="Type your comment here"
+                  maxLength={250}
+                  role="textbox"
+                  onChange={handleChange}
+                  error={newCommentError}
+                />
+                {newCommentError && <p>**Can't be empty</p>}
+              </div>
               <Text as="p" data-testid="words-left">
                 {wordsLeft} characters left
               </Text>
-              <Button>Post Comment</Button>
+              <Button onClick={handleAddNewComment}>Post Comment</Button>
             </div>
           </Card>
         </section>

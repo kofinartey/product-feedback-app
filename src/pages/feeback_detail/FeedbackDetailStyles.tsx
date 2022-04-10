@@ -1,4 +1,5 @@
 import { makeStyles } from "@mui/styles";
+import colors from "../../utils/colors";
 
 export default makeStyles({
   FeedbackDetail: {
@@ -29,9 +30,13 @@ export default makeStyles({
     gridTemplateRs: "1fr 1fr",
     // flexDirection: "column",
 
-    "& textarea": {
+    "& $textInput": {
       marginBottom: "1rem",
       gridColumn: "1/3",
+      "& p": {
+        fontSize: "0.8rem",
+        color: colors.danger,
+      },
     },
     "& button": {
       justifySelf: "flex-end",
@@ -40,6 +45,7 @@ export default makeStyles({
       alignSelf: "center",
     },
   },
+  textInput: {},
 
   //MEDIA QUERIES
   "@media(min-width: 48rem)": {},
