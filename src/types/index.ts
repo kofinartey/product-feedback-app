@@ -15,7 +15,7 @@ export interface CommentInterface {
 export interface SuggestionInterface {
   id: string | number;
   title: string;
-  category: string;
+  category: "suggestion" | "ui"|"ux"|"enhancement"|"bug"|"feature"| string;
   upvotes: number;
   status: "planned"|"in-progress"| "live" | string;
   description: string;

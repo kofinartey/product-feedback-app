@@ -1,8 +1,7 @@
 import { useParams } from "react-router-dom";
-import { useSelector, TypedUseSelectorHook } from "react-redux";
-import { RootState, AppDispatch } from "../../redux/store";
 
 //my imports
+import { useAppDispatch, useAppSelector } from "../../utils/redux-hooks";
 import styles from "../new_feedback/NewFeedbackStyles"; //share same styles with new feedback
 import Text from "../../components/text/Text";
 import TextArea from "../../components/form_elements/TextArea";
@@ -15,7 +14,6 @@ import addIcon from "../../assets/shared/icon-plus.svg";
 function EditFeedback() {
   const classes = styles();
   let { id } = useParams();
-  const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
   const AllFeedbacks = useAppSelector((state) => state.suggestions);
   const feedback = AllFeedbacks.find((feed) => feed.id.toString() === id);
 

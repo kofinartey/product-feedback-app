@@ -50,9 +50,7 @@ function Suggestion({ data }: SuggestionProps) {
     title: {},
     description: {},
     tag: {},
-    upvote: {
-      zIndex: 2,
-    },
+    upvote: {},
     comments: {
       width: "3rem",
       color: "#3A4374",

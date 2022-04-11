@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 //my imports
-
+import { useAppSelector } from "../../utils/redux-hooks";
+import { capFirstLetter } from "../../helper-functions/capFirstLetter";
 import hamburger from "../../assets/shared/mobile/icon-hamburger.svg";
 import close from "../../assets/shared/mobile/icon-close.svg";
 import Card from "../card/Card";
@@ -9,9 +10,49 @@ import Tag from "../tag/Tag";
 import MobileMenuStyles from "./MobileMenuStyles";
 import RoadmapTag from "../roadmap_tag/RoadmapTag";
 
-function MobileMenu() {
+type FilterType =
+  | "all"
+  | "ui"
+  | "ux"
+  | "enhancement"
+  | "feature"
+  | "bug"
+  | string;
+
+type MobileMenuProps = {
+  filter: FilterType;
+  changeFilter: (a: FilterType) => void;
+};
+
+function MobileMenu({ filter, changeFilter }: MobileMenuProps) {
   const classes = MobileMenuStyles();
   const [open, setOpen] = useState(false);
+
+  //get all suggestions and group them
+  const suggetions = useAppSelector((state) => state.suggestions);
+  const planned = suggetions.filter(
+    (suggestion) => suggestion.status === "planned"
+  );
+  const inProgress = suggetions.filter(
+    (suggestion) => suggestion.status === "in-progress"
+  );
+  const live = suggetions.filter((suggestion) => suggestion.status === "live");
+
+  // list tags
+  const tags = ["all", "ui", "ux", "enhancement", "bug", "feature"];
+  const tagsRender = tags.map((tag) => (
+    <Tag
+      onClick={() => {
+        changeFilter(tag);
+        setOpen(false);
+      }}
+      key={tag}
+      active={filter === tag ? true : false}
+    >
+      {capFirstLetter(tag)}
+    </Tag>
+  ));
+
   return (
     <div className={classes.MobileMenu}>
       {/* overlay */}
@@ -46,12 +87,7 @@ function MobileMenu() {
       >
         <div className={classes.tags}>
           <Card style={{ display: "flex", flexWrap: "wrap" }}>
-            <Tag>All</Tag>
-            <Tag>UI</Tag>
-            <Tag>UX</Tag>
-            <Tag>Enhancement</Tag>
-            <Tag>Bug</Tag>
-            <Tag>Feature</Tag>
+            {tagsRender}
           </Card>
         </div>
         <div className={classes.roadmap}>
@@ -60,9 +96,9 @@ function MobileMenu() {
               <h4>Roadmap</h4>
               <Link to="#">View</Link>
             </div>
-            <RoadmapTag status="planned" value={2} />
-            <RoadmapTag status="in-progress" value={2} />
-            <RoadmapTag status="live" value={2} />
+            <RoadmapTag status="planned" value={planned.length} />
+            <RoadmapTag status="in-progress" value={inProgress.length} />
+            <RoadmapTag status="live" value={live.length} />
           </Card>
         </div>
       </div>
