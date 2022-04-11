@@ -30,7 +30,7 @@ function FeedbackDetail() {
   const MAX_CHARACTERS = 250;
   const [newComment, setNewComment] = useState("");
   const [newCommentError, setNewCommentError] = useState(false);
-  const [wordsLeft, setWordsLeft] = useState(250);
+  const [wordsLeft, setWordsLeft] = useState(MAX_CHARACTERS);
   //  TODO:  write test for new comment character length
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -38,6 +38,11 @@ function FeedbackDetail() {
     setNewComment(entry);
     setWordsLeft(MAX_CHARACTERS - entry.length);
     setNewCommentError(false);
+  };
+
+  const reset = () => {
+    setNewComment("");
+    setWordsLeft(MAX_CHARACTERS);
   };
 
   const handleAddNewComment = () => {
@@ -56,6 +61,7 @@ function FeedbackDetail() {
           },
         },
       });
+      reset();
     }
   };
 
@@ -104,6 +110,7 @@ function FeedbackDetail() {
               <div className={classes.textInput}>
                 <TextArea
                   name="comment"
+                  value={newComment}
                   placeholder="Type your comment here"
                   maxLength={250}
                   role="textbox"

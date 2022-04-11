@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 //my imports
-import RoadmapTag from "../roadmap_tag/RoadmapTag";
+
 import { capFirstLetter } from "../../helper-functions/capFirstLetter";
 import { SuggestionInterface } from "../../types";
-import colors from "../../utils/colors";
+import { useAppDispatch } from "../../utils/redux-hooks";
 import Card from "../card/Card";
 import Tag from "../tag/Tag";
 import UpvoteButton from "../upvote_button/UpvoteButton";
@@ -101,8 +101,12 @@ function Suggestion({ data }: SuggestionProps) {
     },
   })();
 
+  const dispatch = useAppDispatch();
   const [totalNumberOfComments, setTotalNumberofComments] = useState(0);
 
+  const handleUpvote = () => {
+    dispatch({ type: "UPVOTE", payload: data.id });
+  };
   // calculate toal number of comments. ie. comments + replies
   useEffect(() => {
     function calcTotalComments() {
@@ -133,7 +137,7 @@ function Suggestion({ data }: SuggestionProps) {
             className={classes.upvote}
             onClick={(event) => event.stopPropagation()}
           >
-            <UpvoteButton upvotes={data?.upvotes} />
+            <UpvoteButton upvotes={data?.upvotes} onClick={handleUpvote} />
           </div>
 
           <div className={classes.comments}>

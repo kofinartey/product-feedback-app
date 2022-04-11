@@ -1,4 +1,5 @@
 import { makeStyles } from "@mui/styles";
+import colors from "../../utils/colors";
 
 export default makeStyles({
   wrapper: {
@@ -54,6 +55,10 @@ export default makeStyles({
     flexDirection: "column",
     alignItems: "center",
     marginBottom: "2rem",
+    "& $replyInput":{
+      position: "relative",
+      width: "100%"
+    },
     "& textarea": {
       width: "100%",
       height: "5rem",
@@ -63,7 +68,12 @@ export default makeStyles({
       marginTop: "1rem",
     },
   },
-
+replyInput:{},
+  error:{
+    fontSize: "0.8rem",
+    color: colors.danger
+  }
+,
   //MEDIA QUERIES
   "@media(min-width:48rem)": {
     Comment: {
@@ -85,7 +95,7 @@ export default makeStyles({
       alignItems: "flex-start",
       justifyContent: "space-between",
       marginLeft: "4rem",
-      "& textarea": {
+      "& $replyInput": {
         width: "80%",
       },
       "& button": {

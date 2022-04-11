@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 //my imports
+import { useAppDispatch } from "../../utils/redux-hooks";
 import Text from "../text/Text";
 import TextArea from "../form_elements/TextArea";
 import Button from "../button/Button";
@@ -13,8 +14,35 @@ type ReplyProps = {
 };
 
 function Reply({ reply }: ReplyProps) {
-  const [replying, setReplying] = useState(false);
   const classes = ReplyStyles();
+  const dispatch = useAppDispatch();
+  const [replying, setReplying] = useState(false);
+  const [replyText, setReplyText] = useState("");
+  const [replyError, setReplyError] = useState(false);
+
+  const toggleReply = () => {
+    setReplying(!replying);
+    resetInput();
+  };
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setReplyText(event.target.value);
+    setReplyError(false);
+  };
+  const resetInput = () => {
+    setReplyError(false);
+    setReplyText("");
+  };
+
+  const handleReply = () => {
+    if (replyText.trim() === "") {
+      setReplyError(true);
+    } else {
+      console.log(replyText);
+      // dispatch({type: "REPLY"})
+      resetInput();
+    }
+  };
+
   return (
     <div className={classes.wrapper}>
       {/* actual reply */}
@@ -28,7 +56,7 @@ function Reply({ reply }: ReplyProps) {
           alt=""
         />
         {/* <div className={classes.user_image}></div> */}
-        <div className={classes.reply} onClick={() => setReplying(true)}>
+        <div className={classes.reply} onClick={toggleReply}>
           <Text as="h5" color="blue">
             Reply
           </Text>
@@ -37,11 +65,9 @@ function Reply({ reply }: ReplyProps) {
           <Text as="h5">{reply.user.name}</Text>
           <Text as="p">@{reply.user.username}</Text>
         </div>
-
         <div className={classes.comment__content}>
           <Text as="p">
             {reply.replyingTo ? <span>@{reply.replyingTo} </span> : ""}
-
             {reply.content}
           </Text>
         </div>
@@ -50,8 +76,11 @@ function Reply({ reply }: ReplyProps) {
       {/* reply form */}
       {replying && (
         <div className={classes.reply__form}>
-          <TextArea />
-          <Button>Post Reply</Button>
+          <div className={classes.replyInput}>
+            <TextArea value={replyText} onChange={handleChange} />
+            {replyError && <p className={classes.error}>**Can't be empty</p>}
+          </div>
+          <Button onClick={handleReply}>Post Reply</Button>
         </div>
       )}
     </div>
