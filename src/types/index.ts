@@ -10,7 +10,7 @@ export interface CommentInterface {
   id: string | number;
   content: string;
   user: UserInterface;
-  replies?: ReplyInterface[] | [];
+  replies: ReplyInterface[] ;
 }
 export interface SuggestionInterface {
   id: string | number;

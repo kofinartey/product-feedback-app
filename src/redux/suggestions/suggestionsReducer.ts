@@ -1,7 +1,6 @@
 import suggestions from "../../data.json";
 import { CommentInterface, ReplyInterface, SuggestionInterface, UserInterface } from "../../types";
 
-
 type addNewComment = {
   type: "ADD_NEW_COMMENT"
   payload: {
@@ -14,8 +13,7 @@ type replyAction = {
   payload: {
     suggestionId:string | number
     commentId: number | string
-    replyId?: number | string
-    reply?: ReplyInterface
+    reply: ReplyInterface
   }
 }
 type upvoteAction = {
@@ -31,21 +29,20 @@ const suggestionsReducer = (
   action: ActionType
 ) => {
   switch(action.type){
-    // case "REPLY":
-    //     if(!action.payload.replyId){
-    //       return state.map(suggestion => suggestion.id !== action.payload.suggestionId? suggestion: {
-    //         ...suggestion,
-    //         comments: suggestion.comments.map(comment => comment.id !== action.payload.commentId? comment: {
-    //           ...comment,
-    //           replies: comment.replies && [...comment.replies, action.payload.reply]
-    //         })
-    //       })
-    //     } else{ return state}
+    case "REPLY": 
+    console.log("reply called")
+      return state.map(suggestion => suggestion.id !== action.payload.suggestionId? suggestion: {
+        ...suggestion,
+        comments: suggestion.comments.map(comment => comment.id !== action.payload.commentId? comment: {
+          ...comment,
+          replies: [...comment.replies, action.payload.reply]
+        })
+      })
     case "UPVOTE": 
-    return state.map(suggestion => suggestion.id === action.payload?{
-      ...suggestion,
-      upvotes: suggestion.upvotes + 1
-    } : suggestion)
+      return state.map(suggestion => suggestion.id === action.payload?{
+        ...suggestion,
+        upvotes: suggestion.upvotes + 1
+      } : suggestion)
      
     case "ADD_NEW_COMMENT":
       return state.map(suggestion => suggestion.id !== action.payload.suggestionId ? suggestion: {

@@ -95,7 +95,7 @@ function FeedbackDetail() {
             {/* render comments */}
             {comments?.map((comment) => (
               <Fragment key={comment.id}>
-                <Comment comment={comment} />
+                <Comment comment={comment} suggestionId={feedback!.id} />
                 {/* <hr /> */}
               </Fragment>
             ))}

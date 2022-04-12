@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 //my imports
-import { useAppDispatch } from "../../utils/redux-hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/redux-hooks";
 import Text from "../text/Text";
 import TextArea from "../form_elements/TextArea";
 import Button from "../button/Button";
@@ -10,12 +10,15 @@ import ReplyStyles from "../comment/CommentStyles"; //shares same styles with co
 
 type ReplyProps = {
   reply: ReplyInterface;
+  suggestionId: string | number;
+  commentId: string | number;
   key: number;
 };
 
-function Reply({ reply }: ReplyProps) {
+function Reply({ reply, commentId, suggestionId }: ReplyProps) {
   const classes = ReplyStyles();
   const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.user);
   const [replying, setReplying] = useState(false);
   const [replyText, setReplyText] = useState("");
   const [replyError, setReplyError] = useState(false);
@@ -38,8 +41,19 @@ function Reply({ reply }: ReplyProps) {
       setReplyError(true);
     } else {
       console.log(replyText);
-      // dispatch({type: "REPLY"})
-      resetInput();
+      dispatch({
+        type: "REPLY",
+        payload: {
+          suggestionId,
+          commentId,
+          reply: {
+            content: replyText,
+            replyingTo: reply.user.username,
+            user,
+          },
+        },
+      });
+      toggleReply();
     }
   };
 
