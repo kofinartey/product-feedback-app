@@ -5,7 +5,15 @@ import Card from "../card/Card";
 import downArrow from "../../assets/shared/icon-arrow-down.svg";
 import check from "../../assets/shared/icon-check.svg";
 
-type SortTabProps = {};
+type SortModeType =
+  | "Most Upvotes"
+  | "Least Upvotes"
+  | "Most Comments"
+  | "Least Comments";
+
+type SortTabProps = {
+  selectSort: (a: SortModeType) => void;
+};
 
 function SortTab(props: SortTabProps) {
   const [open, setOpen] = useState(false);
@@ -16,10 +24,22 @@ function SortTab(props: SortTabProps) {
       cursor: "pointer",
       width: "14rem",
     },
+    overlay: {
+      backgroundColor: "rgba(0,0,0,0.5)",
+      width: "100vw",
+      height: "100vh",
+      position: "fixed",
+      left: 0,
+      top: 0,
+      opacity: open ? 1 : 0,
+      pointerEvents: open ? "all" : "none",
+      zIndex: 0,
+    },
     tab: {
       color: "white",
       display: "flex",
       alignItems: "center",
+      zIndex: 2,
       "&:hover": {
         opacity: "0.7",
       },
@@ -64,7 +84,11 @@ function SortTab(props: SortTabProps) {
   });
   const classes = styles();
 
-  const options = [
+  const toggleOpen = () => {
+    setOpen(!open);
+  };
+
+  const options: SortModeType[] = [
     "Most Upvotes",
     "Least Upvotes",
     "Most Comments",
@@ -73,7 +97,8 @@ function SortTab(props: SortTabProps) {
 
   return (
     <div className={classes.SortTab}>
-      <div className={classes.tab} onClick={() => setOpen(!open)}>
+      <div className={classes.overlay} onClick={toggleOpen}></div>
+      <div className={classes.tab} onClick={toggleOpen}>
         <p>Sort by : </p>
         <p className={classes.selected}> {selected} </p>
         <img src={downArrow} alt="" />
@@ -86,6 +111,7 @@ function SortTab(props: SortTabProps) {
               key={option}
               onClick={() => {
                 setSelected(option);
+                props.selectSort(option);
                 setOpen(!open);
               }}
             >

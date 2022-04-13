@@ -22,16 +22,28 @@ type FilterType =
   | "feature"
   | "bug"
   | string;
+
+type SortModeType =
+  | "Most Upvotes"
+  | "Least Upvotes"
+  | "Most Comments"
+  | "Least Comments";
+
 type SuggestionListProps = {
   filter: FilterType;
 };
 
 function SuggestionsList({ filter }: SuggestionListProps) {
   const classes = SuggestionPageStyles();
+  const [sortMode, setSortMode] = useState<SortModeType>("Most Upvotes");
   const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
   const listOfSuggestions = useAppSelector((state) => state.suggestions);
   const suggestionsNumber = listOfSuggestions.length;
   const navigate = useNavigate();
+
+  const selectSort = (item: SortModeType) => {
+    setSortMode(item);
+  };
 
   // all, ui, ux, feature, bug, enhancement
   const UIList = listOfSuggestions.filter(
@@ -51,6 +63,7 @@ function SuggestionsList({ filter }: SuggestionListProps) {
   );
 
   const renderList = () => {
+    //predetermine list based of filter
     let list: SuggestionInterface[];
     switch (filter) {
       case "ui":
@@ -72,6 +85,23 @@ function SuggestionsList({ filter }: SuggestionListProps) {
         list = listOfSuggestions;
     }
 
+    //sort out list based on sort mode
+    if (list) {
+      // @ts-ignore
+      list.sort((a, b) => {
+        switch (sortMode) {
+          case "Most Upvotes":
+            return b.upvotes - a.upvotes;
+          case "Least Upvotes":
+            return a.upvotes - b.upvotes;
+          case "Most Comments":
+            return b.comments.length - a.comments.length;
+          case "Least Comments":
+            return a.comments.length - b.comments.length;
+        }
+      });
+    }
+
     return list.length > 0 ? (
       list.map((suggestion) => (
         <div
@@ -89,7 +119,10 @@ function SuggestionsList({ filter }: SuggestionListProps) {
         <Card>
           <div className={classes.empty__wrapper}>
             <img src={empty} alt="" />
-            <Text as="h4">There is no {filter.toUpperCase()} feedback yet</Text>
+            <Text as="h4">
+              There is no {filter !== "all" ? filter.toUpperCase() : ""}{" "}
+              feedback yet
+            </Text>
             <Text as="p">
               Got a suggestion? Found a bug that needs to be squashed? We love
               hearing about new ideas to improve our app.
@@ -101,25 +134,6 @@ function SuggestionsList({ filter }: SuggestionListProps) {
     );
   };
 
-  const renderSuggestions =
-    suggestionsNumber === 0 ? (
-      <div className={classes.empty}>
-        <Card>
-          <div className={classes.empty__wrapper}>
-            <img src={empty} alt="" />
-            <Text as="h4">There is no feedback yet</Text>
-            <Text as="p">
-              Got a suggestion? Found a bug that needs to be squashed? We love
-              hearing about new ideas to improve our app.
-            </Text>
-            <Button onClick={() => navigate("/new")}>+ Add Feedback</Button>
-          </div>
-        </Card>
-      </div>
-    ) : (
-      renderList()
-    );
-
   //Main return function
   return (
     <div className={classes.SuggestionsList}>
@@ -129,13 +143,11 @@ function SuggestionsList({ filter }: SuggestionListProps) {
           <img src={suggImg} alt="" />
           <p>{suggestionsNumber} Suggestions</p>
         </div>
-        <SortTab />
+        <SortTab selectSort={selectSort} />
         <Button onClick={() => navigate("/new")}>+ Add Feedback</Button>
       </div>
 
-      {/* list of suggestions  */}
-
-      {renderSuggestions}
+      {renderList()}
     </div>
   );
 }

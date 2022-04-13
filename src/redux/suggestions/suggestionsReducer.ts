@@ -30,7 +30,6 @@ const suggestionsReducer = (
 ) => {
   switch(action.type){
     case "REPLY": 
-    console.log("reply called")
       return state.map(suggestion => suggestion.id !== action.payload.suggestionId? suggestion: {
         ...suggestion,
         comments: suggestion.comments.map(comment => comment.id !== action.payload.commentId? comment: {

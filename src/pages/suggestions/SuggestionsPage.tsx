@@ -19,9 +19,7 @@ function SuggestionsPage() {
   const [filter, setFilter] = useState<FilterType>("all");
 
   const changeFilter = (newFilter: FilterType) => {
-    console.log("change filter called");
     setFilter(newFilter);
-    console.log(newFilter);
   };
   // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
