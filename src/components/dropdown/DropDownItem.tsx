@@ -7,6 +7,8 @@ type DropDownItemsProps = {
   someFunction: (event: React.MouseEvent) => void;
   children: React.ReactNode;
 };
+// & React.ComponentProps<"option">;
+
 export function DropDownItem(props: DropDownItemsProps) {
   const classes = makeStyles({
     item: {

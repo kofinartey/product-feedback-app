@@ -7,6 +7,8 @@ type DropDownMenuProps = {
   initial: string;
   children: React.ComponentType;
 };
+// & React.ComponentProps<"select">;
+
 export function DropDownMenu(props: DropDownMenuProps) {
   const [open, setOpen] = useState(false);
   const classes = makeStyles({

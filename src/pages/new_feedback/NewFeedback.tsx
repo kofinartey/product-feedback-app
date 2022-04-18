@@ -8,6 +8,15 @@ import Text from "../../components/text/Text";
 import addIcon from "../../assets/shared/icon-new-feedback.svg";
 import NewFeedbackStyles from "./NewFeedbackStyles";
 import Button from "../../components/button/Button";
+import CustomSelect from "../../components/custom_select/CustomSelect";
+
+const categories = [
+  { label: "Feature", value: "feature" },
+  { label: "Bug", value: "bug" },
+  { label: "Enhancement", value: "enhancement" },
+  { label: "UI", value: "ui" },
+  { label: "UX", value: "ux" },
+];
 
 function NewFeedback() {
   const classes = NewFeedbackStyles();
@@ -30,7 +39,7 @@ function NewFeedback() {
             <div className={classes.form__control}>
               <Text as="h5">Category</Text>
               <Text as="p">Add a short, descriptive headline</Text>
-              <TextArea></TextArea>
+              <CustomSelect options={categories} />
             </div>
             <div className={classes.form__control}>
               <Text as="h5">Feedback Detail</Text>
