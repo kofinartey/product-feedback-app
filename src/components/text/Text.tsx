@@ -22,11 +22,25 @@ function Text({ children, textColor, as, ...rest }: TextProps) {
     text: {
       // color: textColor && `${colors[textColor]}`,
       color: textColor ? `${colors[textColor]}` : colors.darkGrey,
-      fontSize: as === "p" ? "13px" : as === "h4" ? "1.125rem" : "",
+      fontSize:
+        as === "p"
+          ? "13px"
+          : as === "h4"
+          ? "1.125rem"
+          : as === "h1"
+          ? "18px"
+          : "",
     },
     "@media(min-width: 48rem)": {
       text: {
-        fontSize: as === "p" ? "1rem" : as === "h4" ? "1.5rem" : "",
+        fontSize:
+          as === "p"
+            ? "1rem"
+            : as === "h1"
+            ? "24px"
+            : as === "h4"
+            ? "1.5rem"
+            : "",
       },
     },
   })();

@@ -35,6 +35,7 @@ const styles = makeStyles({
     boxShadow: "0 5px 10px rgba(0,0,0,0.2)",
     overflow: "hidden",
     position: "absolute",
+    zIndex: 2,
   },
   option: {
     width: "100%",

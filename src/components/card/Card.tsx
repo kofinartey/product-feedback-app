@@ -11,7 +11,7 @@ function Card({ children, style }: CardProps) {
     Card: {
       width: "100%",
       backgroundColor: "white",
-      padding: "1rem",
+      padding: "2rem",
       borderRadius: "0.5rem",
       ...style,
     },

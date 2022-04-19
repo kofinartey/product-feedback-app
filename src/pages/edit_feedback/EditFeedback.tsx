@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 //my imports
@@ -10,6 +11,16 @@ import Button from "../../components/button/Button";
 import GoBack from "../../components/go_back/GoBack";
 import Card from "../../components/card/Card";
 import addIcon from "../../assets/shared/icon-plus.svg";
+import CustomSelect from "../../components/custom_select/CustomSelect";
+import FeedbackForm from "../../components/form/FeedbackForm";
+
+const categories = [
+  { label: "Feature", value: "feature" },
+  { label: "Bug", value: "bug" },
+  { label: "Enhancement", value: "enhancement" },
+  { label: "UI", value: "ui" },
+  { label: "UX", value: "ux" },
+];
 
 function EditFeedback() {
   const classes = styles();
@@ -17,49 +28,19 @@ function EditFeedback() {
   const AllFeedbacks = useAppSelector((state) => state.suggestions);
   const feedback = AllFeedbacks.find((feed) => feed.id.toString() === id);
 
+  const [title, setTitle] = useState(feedback?.title);
+  const [details, setDetails] = useState(feedback?.description);
+  const [category, setCategory] = useState(
+    () => categories.find((category) => feedback?.category === category.value)!
+  );
+
   return (
     <main className={classes.NewFeedback}>
       <div className={classes.wrapper}>
         <nav>
           <GoBack />
         </nav>
-        <form>
-          <Card>
-            <img src={addIcon} className={classes.addIcon} alt="" />
-            <Text as="h1">Create New Feedback</Text>
-            <div className={classes.form__control}>
-              <Text as="h5">Feedback Title</Text>
-              <Text as="p">Add a short, descriptive headline</Text>
-              <TextInput />
-            </div>
-
-            <div className={classes.form__control}>
-              <Text as="h5">Category</Text>
-              <Text as="p">Add a short, descriptive headline</Text>
-              <TextArea></TextArea>
-            </div>
-            <div className={classes.form__control}>
-              <Text as="h5">Update Status</Text>
-              <Text as="p">Change feedback state</Text>
-              <TextArea></TextArea>
-            </div>
-            <div className={classes.form__control}>
-              <Text as="h5">Feedback Detail</Text>
-              <Text as="p">
-                Include any specific comments on what should be improved, added,
-                etc.
-              </Text>
-              <TextArea></TextArea>
-            </div>
-
-            {/* buttons container */}
-            <div className={classes.buttons__container}>
-              <Button color="tertiary">Add Feedback</Button>
-              <Button color="primary">Cancel</Button>
-              <Button color="danger">Delete</Button>
-            </div>
-          </Card>
-        </form>
+        <FeedbackForm feedback={feedback} />
       </div>
     </main>
   );
