@@ -20,6 +20,11 @@ type editFeedback = {
     status: string
   }
 }
+
+type deleteFeedback = {
+  type: "DELETE_FEEDBACK",
+  payload:  number| string
+}
 type addNewComment = {
   type: "ADD_NEW_COMMENT"
   payload: {
@@ -40,7 +45,7 @@ type upvoteAction = {
   payload: string | number
 }
 
-type ActionType = addNewFeedback |editFeedback |addNewComment | replyAction | upvoteAction
+type ActionType = addNewFeedback |editFeedback |deleteFeedback|addNewComment | replyAction | upvoteAction
 
 const suggestionsReducer = (
   // state = [],
@@ -57,7 +62,7 @@ const suggestionsReducer = (
 
       }]
 
-      case "EDIT_FEEDBACK": 
+    case "EDIT_FEEDBACK": 
       return state.map(suggestion => suggestion.id === action.payload.id?
         {
           ...suggestion,
@@ -67,6 +72,9 @@ const suggestionsReducer = (
           status: action.payload.status,
         }
         :suggestion)
+     
+     case "DELETE_FEEDBACK": 
+        return state.filter(suggestion => suggestion.id !== action.payload)   
     case "REPLY": 
       return state.map(suggestion => suggestion.id !== action.payload.suggestionId? suggestion: {
         ...suggestion,

@@ -13,6 +13,7 @@ import Button from "../button/Button";
 import CustomSelect from "../custom_select/CustomSelect";
 import FeedbackFormStyles from "./FeedbackFormStyles";
 import { SuggestionInterface } from "../../types";
+import DeleteConfirmation from "../delete_confirmation/DeleteConfirmation";
 
 const categories = [
   { label: "Feature", value: "feature" },
@@ -40,6 +41,8 @@ function FeedbackForm({ feedback }: FeedbackFormProps) {
   const [titleError, setTitleError] = useState(false);
   const [details, setDetails] = useState(feedback ? feedback.description : "");
   const [detailsError, setDetailsError] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  //category and status depends on whether the FeedbackForm is rendered with feedback data
   const [category, setCategory] = useState(
     feedback
       ? () =>
@@ -115,6 +118,10 @@ function FeedbackForm({ feedback }: FeedbackFormProps) {
     navigate("/");
   };
 
+  const toggleDelete = () => {
+    setIsDeleting(!isDeleting);
+  };
+
   const formTitle = (
     <Text as="h1">
       {feedback ? `Editing '${feedback.title}'` : " Create New Feedback"}
@@ -125,69 +132,78 @@ function FeedbackForm({ feedback }: FeedbackFormProps) {
   // MAIN COMPONENT RETURN METHOD
   // MAIN COMPONENT RETURN METHOD
   return (
-    <form onSubmit={handleSubmit}>
-      <Card>
-        <img src={addIcon} className={classes.addIcon} alt="" />
-        {formTitle}
-        <div className={classes.form__control}>
-          <Text as="h5">Feedback Title</Text>
-          <Text as="p">Add a short, descriptive headline</Text>
-          <TextInput
-            value={title}
-            onChange={handleChange}
-            id="title"
-            error={titleError}
-          />
-        </div>
-
-        <div className={classes.form__control}>
-          <Text as="h5">Category</Text>
-          <Text as="p">Add a short, descriptive headline</Text>
-          <CustomSelect
-            options={categories}
-            value={category}
-            onChange={setCategory}
-          />
-        </div>
-
-        {feedback && (
+    <>
+      {feedback && isDeleting && (
+        <DeleteConfirmation feedback={feedback} toggleDelete={toggleDelete} />
+      )}
+      <form onSubmit={handleSubmit}>
+        <Card>
+          <img src={addIcon} className={classes.addIcon} alt="" />
+          {formTitle}
           <div className={classes.form__control}>
-            <Text as="h5">Update Status</Text>
-            <Text as="p">Change feature state</Text>
-            <CustomSelect
-              options={statuses}
-              value={status}
-              onChange={setStatus}
+            <Text as="h5">Feedback Title</Text>
+            <Text as="p">Add a short, descriptive headline</Text>
+            <TextInput
+              value={title}
+              onChange={handleChange}
+              id="title"
+              error={titleError}
             />
           </div>
-        )}
-        <div className={classes.form__control}>
-          <Text as="h5">Feedback Detail</Text>
-          <Text as="p">
-            Include any specific comments on what should be improved, added,
-            etc.
-          </Text>
-          <TextArea
-            id="detail"
-            error={detailsError}
-            value={details}
-            onChange={handleChange}
-          ></TextArea>
-          {detailsError && errorMessage}
-        </div>
 
-        {/* buttons container */}
-        <div className={classes.buttons__container}>
-          <Button color="tertiary" type="submit">
-            {feedback ? "Save Changes" : "Add Feedback"}
-          </Button>
-          <Button color="primary" type="button" onClick={handleCancel}>
-            Cancel
-          </Button>
-          {feedback && <Button color="danger">Delete</Button>}
-        </div>
-      </Card>
-    </form>
+          <div className={classes.form__control}>
+            <Text as="h5">Category</Text>
+            <Text as="p">Add a short, descriptive headline</Text>
+            <CustomSelect
+              options={categories}
+              value={category}
+              onChange={setCategory}
+            />
+          </div>
+
+          {feedback && (
+            <div className={classes.form__control}>
+              <Text as="h5">Update Status</Text>
+              <Text as="p">Change feature state</Text>
+              <CustomSelect
+                options={statuses}
+                value={status}
+                onChange={setStatus}
+              />
+            </div>
+          )}
+          <div className={classes.form__control}>
+            <Text as="h5">Feedback Detail</Text>
+            <Text as="p">
+              Include any specific comments on what should be improved, added,
+              etc.
+            </Text>
+            <TextArea
+              id="detail"
+              error={detailsError}
+              value={details}
+              onChange={handleChange}
+            ></TextArea>
+            {detailsError && errorMessage}
+          </div>
+
+          {/* buttons container */}
+          <div className={classes.buttons__container}>
+            <Button color="tertiary" type="submit">
+              {feedback ? "Save Changes" : "Add Feedback"}
+            </Button>
+            <Button color="primary" type="button" onClick={handleCancel}>
+              Cancel
+            </Button>
+            {feedback && (
+              <Button color="danger" type="button" onClick={toggleDelete}>
+                Delete
+              </Button>
+            )}
+          </div>
+        </Card>
+      </form>
+    </>
   );
 }
 

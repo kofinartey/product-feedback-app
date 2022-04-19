@@ -42,6 +42,9 @@ export default makeStyles({
         width: "unset",
         marginLeft: "1rem",
       },
+      // "& button:nth-of-type(3)": {
+      //   justifySelf: "flex-end",
+      // },
     },
   },
 });

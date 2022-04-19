@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
+import colors from "../../utils/colors";
 
 type ButtonProps = {
   color?: "primary" | "secondary" | "tertiary" | "danger";
@@ -10,22 +11,23 @@ function Button({ children, color, ...rest }: ButtonProps) {
   const styles = makeStyles({
     Button: {
       border: "none",
-      color: "white",
-      backgroundColor:
-        color === "primary"
-          ? "#373F68"
-          : color === "secondary"
-          ? "#4661E6"
-          : color === "tertiary"
-          ? "#AD1FEA"
-          : color === "danger"
-          ? "#D73737"
-          : "#AD1FEA", //use tcolor if not specified
+      color: rest.disabled ? "rgba(0,0,0,0.2)" : "white",
+      backgroundColor: rest.disabled
+        ? "rgba(0,0,0,0.1)"
+        : color === "primary"
+        ? "#373F68"
+        : color === "secondary"
+        ? "#4661E6"
+        : color === "tertiary"
+        ? "#AD1FEA"
+        : color === "danger"
+        ? "#D73737"
+        : "#AD1FEA", //use tcolor if not specified
       padding: "0.7rem 1rem",
       borderRadius: "0.5rem",
       fontWeight: "bold",
       fontSize: "0.8125rem",
-      cursor: "pointer",
+      cursor: rest.disabled ? "default" : "pointer",
       transition: "all ease-in-out 0.1s",
       "&:hover": {
         opacity: 0.7,
