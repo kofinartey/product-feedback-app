@@ -1,6 +1,15 @@
 import suggestions from "../../data.json";
 import { CommentInterface, ReplyInterface, SuggestionInterface, UserInterface } from "../../types";
 
+type addNewFeedback = {
+  type: "ADD_NEW_FEEDBACK",
+  payload: {
+    id: string|number
+    title: string
+    description: string
+    category: string
+  }
+}
 type addNewComment = {
   type: "ADD_NEW_COMMENT"
   payload: {
@@ -21,7 +30,7 @@ type upvoteAction = {
   payload: string | number
 }
 
-type ActionType = addNewComment | replyAction | upvoteAction
+type ActionType = addNewFeedback|addNewComment | replyAction | upvoteAction
 
 const suggestionsReducer = (
   // state = [],
@@ -29,6 +38,14 @@ const suggestionsReducer = (
   action: ActionType
 ) => {
   switch(action.type){
+    case "ADD_NEW_FEEDBACK":
+      return [...state, {
+        ...action.payload,
+        status: "suggestion",
+        comments: [],
+        upvotes: 0,
+
+      }]
     case "REPLY": 
       return state.map(suggestion => suggestion.id !== action.payload.suggestionId? suggestion: {
         ...suggestion,

@@ -1,4 +1,5 @@
 import { makeStyles } from "@mui/styles";
+import colors from "../../utils/colors";
 
 export default makeStyles({
   NewFeedback: {
@@ -33,6 +34,10 @@ export default makeStyles({
     "& textarea": {
       height: "8rem",
     },
+  },
+  error: {
+    color: colors.danger,
+    fontSize: "0.8rem",
   },
 
   buttons__container: {

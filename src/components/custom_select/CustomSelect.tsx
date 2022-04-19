@@ -50,27 +50,30 @@ const styles = makeStyles({
     },
   },
 });
-
+type CategoryType = {
+  label: string;
+  value: string;
+};
 type CustomSelectProps = {
-  options: {
-    label: string;
-    value: string;
-  }[];
+  options: CategoryType[];
+  value: CategoryType;
+  onChange: React.Dispatch<
+    React.SetStateAction<{
+      label: string;
+      value: string;
+    }>
+  >;
 };
 
-const CustomSelect = ({ options }: CustomSelectProps) => {
+const CustomSelect = ({ options, value, onChange }: CustomSelectProps) => {
   const [selected, setSelected] = useState(options[0]);
   const classes = styles();
 
-  useEffect(() => {
-    console.log(selected.label);
-  }, [selected]);
-
   return (
     <div className={classes.container}>
-      <Listbox value={selected} onChange={setSelected}>
+      <Listbox value={value} onChange={onChange}>
         <Listbox.Button className={classes.select}>
-          {selected.label}
+          {value.label}
           <img src={arrowDown} alt="" />
         </Listbox.Button>
         <Listbox.Options className={classes.options}>
@@ -79,7 +82,7 @@ const CustomSelect = ({ options }: CustomSelectProps) => {
               {({ active, selected }) => (
                 <li className={classes.option}>
                   {item.label}
-                  {selected && <img src={check} alt="" />}
+                  {item.label === value.label && <img src={check} alt="" />}
                 </li>
               )}
               {/* {person.name} */}
