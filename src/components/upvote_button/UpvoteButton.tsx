@@ -50,7 +50,7 @@ function UpvoteButton({ upvotes, inRoadmap, ...rest }: UpvoteButtonTypes) {
   return (
     <button className={classes.btn} {...rest}>
       <img src={upArrow} alt="" />
-      <p>{upvotes}</p>
+      <p data-testid="upvotes">{upvotes}</p>
     </button>
   );
 }

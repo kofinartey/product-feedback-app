@@ -25,7 +25,7 @@ function FeedbackDetail() {
 
   const feedback = allFeedbacks.find(
     (item) => item.id.toString() === feedbackId
-  );
+  )!;
 
   const comments = feedback?.comments;
 

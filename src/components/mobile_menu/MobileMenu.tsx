@@ -94,7 +94,7 @@ function MobileMenu({ filter, changeFilter }: MobileMenuProps) {
           <Card>
             <div className={classes.roadmap__top}>
               <h4>Roadmap</h4>
-              <Link to="#">View</Link>
+              <Link to="/roadmap">View</Link>
             </div>
             <RoadmapTag status="planned" value={planned.length} />
             <RoadmapTag status="in-progress" value={inProgress.length} />
