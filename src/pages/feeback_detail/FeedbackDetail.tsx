@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Listbox } from "@headlessui/react";
+import { motion } from "framer-motion";
 
 //my imports
 import { useAppDispatch, useAppSelector } from "../../utils/redux-hooks";
@@ -13,6 +13,26 @@ import FeedbackDetailStyles from "./FeedbackDetailStyles";
 import Card from "../../components/card/Card";
 import Comment from "../../components/comment/Comment";
 import TextArea from "../../components/form_elements/TextArea";
+
+//framer motion variants
+const wrapperVariant = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const childVariant = {
+  hidden: {
+    opacity: 0,
+    y: -20,
+  },
+  visible: { opacity: 1, y: 0 },
+};
 
 function FeedbackDetail() {
   const classes = FeedbackDetailStyles();
@@ -77,7 +97,12 @@ function FeedbackDetail() {
 
   return (
     <main className={classes.FeedbackDetail}>
-      <div className={classes.wrapper}>
+      <motion.div
+        className={classes.wrapper}
+        variants={wrapperVariant}
+        initial="hidden"
+        animate="visible"
+      >
         <nav>
           <GoBack />
           <Link to={`/edit/${feedback!.id}`}>
@@ -89,7 +114,10 @@ function FeedbackDetail() {
         <Suggestion data={feedback!} />
 
         {/* comments section */}
-        <section className={classes.comments__section}>
+        <motion.section
+          className={classes.comments__section}
+          variants={childVariant}
+        >
           <Card>
             <div>
               <Text as="h3">{feedback?.comments?.length} Comments</Text>
@@ -102,10 +130,13 @@ function FeedbackDetail() {
               </Fragment>
             ))}
           </Card>
-        </section>
+        </motion.section>
 
         {/* add new comment section */}
-        <section className={classes.new__comment}>
+        <motion.section
+          className={classes.new__comment}
+          variants={childVariant}
+        >
           <Card>
             <Text as="h4">Add Comment</Text>
             <div className={classes.input__wrapper}>
@@ -127,8 +158,8 @@ function FeedbackDetail() {
               <Button onClick={handleAddNewComment}>Post Comment</Button>
             </div>
           </Card>
-        </section>
-      </div>
+        </motion.section>
+      </motion.div>
     </main>
   );
 }

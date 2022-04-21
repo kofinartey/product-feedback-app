@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
-//my imports
+// import { motion } from "framer-motion";
 
+//my imports
 import { capFirstLetter } from "../../helper-functions/capFirstLetter";
 import { SuggestionInterface } from "../../types";
 import { useAppDispatch } from "../../utils/redux-hooks";
@@ -18,8 +19,13 @@ type SuggestionProps = {
 function Suggestion({ data }: SuggestionProps) {
   const classes = makeStyles({
     suggestion: {
-      // padding: "0 2rem",
       margin: "1rem 0",
+      transition: "transform 0.2s ease-in-out",
+      "&:hover": {
+        color: "red",
+        transform: "scale(1.02)",
+        boxShadow: "0 10px 10px rgba(0,0,0,0.02)",
+      },
     },
     wrapper: {
       // padding: "1rem",

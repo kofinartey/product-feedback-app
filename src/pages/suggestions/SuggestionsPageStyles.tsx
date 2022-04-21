@@ -2,8 +2,6 @@ import { makeStyles } from "@mui/styles";
 
 export default makeStyles({
   Suggestions: {
-    // width: "100%",
-
     minHeight: "100vh",
     display: "flex",
     justifyContent: "center",
@@ -15,7 +13,8 @@ export default makeStyles({
   SuggestionsList: {
     width: "100%",
   },
-  list__wrapper: {
+  list__wrapper: {},
+  suggestion__wrapper: {
     padding: "0 2rem",
   },
   empty: {
@@ -69,7 +68,7 @@ export default makeStyles({
       padding: "0.8rem",
       borderRadius: "0.5rem",
     },
-    list__wrapper: {
+    suggestion__wrapper: {
       padding: "0",
     },
     empty__wrapper: {

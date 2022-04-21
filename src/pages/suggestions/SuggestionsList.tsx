@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../../redux/store";
+import { motion } from "framer-motion";
 
 //my imports
 import { SuggestionInterface } from "../../types";
@@ -9,10 +10,26 @@ import Suggestion from "../../components/suggestion/Suggestion";
 import Card from "../../components/card/Card";
 import Button from "../../components/button/Button";
 import SortTab from "../../components/sort_tab/SortTab";
-import SuggestionPageStyles from "./SuggestionsPageStyles";
 import suggImg from "../../assets/suggestions/icon-suggestions.svg";
 import empty from "../../assets/suggestions/illustration-empty.svg";
 import Text from "../../components/text/Text";
+import SuggestionPageStyles from "./SuggestionsPageStyles";
+
+//framer motion variants
+const listWrapperVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.1,
+    },
+  },
+};
+const suggestionWrapperVariants = {
+  hidden: { y: -20 },
+  visible: { y: 0 },
+};
 
 type FilterType =
   | "all"
@@ -104,15 +121,16 @@ function SuggestionsList({ filter }: SuggestionListProps) {
 
     return list.length > 0 ? (
       list.map((suggestion) => (
-        <div
+        <motion.div
           key={suggestion.id}
-          className={classes.list__wrapper}
+          className={classes.suggestion__wrapper}
           onClick={(event) => event.stopPropagation()}
+          variants={suggestionWrapperVariants}
         >
           <Link to={`/feedback/${suggestion.id}`}>
             <Suggestion key={suggestion.id} data={suggestion} />
           </Link>
-        </div>
+        </motion.div>
       ))
     ) : (
       <div className={classes.empty}>
@@ -147,7 +165,14 @@ function SuggestionsList({ filter }: SuggestionListProps) {
         <Button onClick={() => navigate("/new")}>+ Add Feedback</Button>
       </div>
 
-      {renderList()}
+      <motion.div
+        className={classes.list__wrapper}
+        variants={listWrapperVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {renderList()}
+      </motion.div>
     </div>
   );
 }
