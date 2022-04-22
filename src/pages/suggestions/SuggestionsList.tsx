@@ -127,7 +127,7 @@ function SuggestionsList({ filter }: SuggestionListProps) {
           onClick={(event) => event.stopPropagation()}
           variants={suggestionWrapperVariants}
         >
-          <Link to={`/feedback/${suggestion.id}`}>
+          <Link to={`/${suggestion.id}`}>
             <Suggestion key={suggestion.id} data={suggestion} />
           </Link>
         </motion.div>

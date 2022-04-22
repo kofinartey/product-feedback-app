@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import { useState } from "react";
 import { useSelector, TypedUseSelectorHook } from "react-redux";
 import { RootState, AppDispatch } from "../../redux/store";
@@ -17,6 +17,10 @@ function Roadmap() {
   const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
   const suggestions = useAppSelector((state) => state.suggestions);
   const [selected, setSelected] = useState("planned");
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  window.addEventListener("resize", () => {
+    setWindowWidth(window.innerWidth);
+  });
 
   const statusList = [
     { status: "planned", color: colors.orange },
@@ -82,7 +86,13 @@ function Roadmap() {
   //apply to wrapper
   const slidingStyles = {
     left:
-      selected === "live" ? "-200%" : selected === "in-progress" ? "-100%" : 0,
+      windowWidth > 768
+        ? 0
+        : selected === "live"
+        ? "-200%"
+        : selected === "in-progress"
+        ? "-100%"
+        : 0,
   };
 
   /*  page layout

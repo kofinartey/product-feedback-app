@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { ReactHTML, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 // import { motion } from "framer-motion";
@@ -108,7 +108,8 @@ function Suggestion({ data }: SuggestionProps) {
   const dispatch = useAppDispatch();
   const [totalNumberOfComments, setTotalNumberofComments] = useState(0);
 
-  const handleUpvote = () => {
+  const handleUpvote = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     dispatch({ type: "UPVOTE", payload: data.id });
   };
   // calculate toal number of comments. ie. comments + replies

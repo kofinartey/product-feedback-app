@@ -12,9 +12,7 @@ function ProductFeedbackApp() {
     <Router>
       <Routes>
         <Route path="/" element={<SuggestionsPage />} />
-        <Route path="feedback">
-          <Route path=":feedbackId" element={<FeedbackDetail />} />
-        </Route>
+        <Route path="/:feedbackId" element={<FeedbackDetail />} />
         <Route path="new" element={<NewFeedback />} />
         <Route path="edit/:id" element={<EditFeedback />} />
         <Route path="roadmap" element={<Roadmap />} />
