@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 //my imports
 import SuggestionPageStyles from "./SuggestionsPageStyles";
-import SidePanel from "../../components/sidepanel/SidePanel";
+import SidePanel from "../../components/sidepanel/Sidepanel";
 import SuggestionsList from "./SuggestionsList";
 import MobileMenu from "../../components/mobile_menu/MobileMenu";
 
